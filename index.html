@@ -202,12 +202,12 @@ footer strong{font-family:var(--brand);font-weight:400;font-size:1.15rem;letter-
 .statrows{list-style:none;margin:0;padding:0;max-width:760px;display:flex;flex-direction:column;gap:14px}
 .statrow button{width:100%;display:grid;grid-template-columns:5.2rem minmax(0,1fr) 20px;gap:20px;align-items:center;padding:18px 26px;background:var(--on-dark);border:0;border-radius:99px;cursor:pointer;text-align:left;box-shadow:0 14px 30px -18px rgba(0,0,0,.4)}
 .statrow .fig{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3vw,2.1rem);color:var(--accent);line-height:1}
-.statrow p{color:var(--ink);margin:0}
+.statrow p{color:var(--accent-strong);margin:0}
 .statrow .chev{color:var(--ink-3);opacity:.8;transition:transform .2s;justify-self:end}
 .statrow button[aria-expanded="true"] .chev{transform:rotate(45deg)}
-.statrow .sub{max-height:0;overflow:hidden;transition:max-height .25s ease;padding:0 26px;background:rgba(255,255,255,.4);border-radius:18px}
-.statrow button[aria-expanded="true"] + .sub{max-height:140px;padding:14px 26px}
-.statrow .sub p{margin:0;color:var(--ink);font-size:.92rem;max-width:52ch;line-height:1.5}
+.statrow .sub{max-height:0;overflow:hidden;transition:max-height .25s ease;padding:0 26px}
+.statrow button[aria-expanded="true"] + .sub{max-height:120px;padding-top:10px}
+.statrow .sub p{margin:0 0 4px;color:var(--ink);font-size:.92rem;max-width:52ch}
 .stats-src{margin-top:24px;color:var(--ink);opacity:.7;font-size:.86rem;font-family:var(--small)}
 </style>
 
@@ -523,18 +523,20 @@ footer strong{color:var(--ink);font-family:var(--brand);font-size:1.05rem}
         <p id="shareStatus" role="status"></p>
       </div>
     </div>
-    <form class="form" id="joinForm" novalidate>
+    <form class="form" id="joinForm" action="https://formspree.io/f/xkjgbozd" method="POST" novalidate>
       <div>
         <label id="whoLabel">Who are you?</label>
         <div class="seg" role="group" aria-labelledby="whoLabel">
           <button type="button" data-who="individual" aria-pressed="true">An individual</button>
           <button type="button" data-who="community" aria-pressed="false">A community or organisation</button>
         </div>
+        <input type="hidden" name="who" id="who-hidden" value="An individual">
       </div>
       <div>
         <label for="jn-contact">Phone, Telegram handle, or email</label>
-        <input id="jn-contact" type="text" autocomplete="off" required placeholder="e.g. 9123 4567, @yourhandle, or you@email.com">
+        <input id="jn-contact" name="contact" type="text" autocomplete="off" required placeholder="e.g. 9123 4567, @yourhandle, or you@email.com">
       </div>
+      <input type="hidden" name="_subject" value="New In Good Hands early-access signup">
       <button class="btn" type="submit">Request early access</button>
       <p class="status" id="joinStatus" role="status"></p>
     </form>
@@ -544,13 +546,13 @@ footer strong{color:var(--ink);font-family:var(--brand);font-size:1.05rem}
 <section class="sec sec-why on-light" id="why" style="padding-block:36px">
   <div class="wrap why-note">
     <span class="eyebrow">Why In Good Hands</span>
-    <p>In Good Hands started after our founder had to plan a funeral with almost no notice — confused, exhausted, and grieving all at once. We're building the steady guidance she needed, so it reaches families earlier and more easily. We're learning from what's worked for services like Empathy Loss Support overseas, and adapting it for Singapore and the wider region — grounded in 9 conversations with grieving families in Singapore and Indonesia so far.</p>
+    <p>In Good Hands started after our founder had to plan a funeral with almost no notice — confused, exhausted, and grieving all at once. We're building the steady guidance one would need, so it reaches families earlier and more easily. We're learning from what's worked for services like Empathy Loss Support overseas, and adapting it for Singapore and the wider region — grounded in conversations with grieving families in Singapore and Indonesia so far.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p><strong>In Good Hands</strong> — currently testing in Singapore · [YOUR CONTACT EMAIL]</p>
+    <p><strong>In Good Hands</strong> — currently testing in Singapore · Contact number: <a href="tel:+6593826890">+65 9382 6890</a></p>
     <p>This page is a working preview. The concierge demo uses sample conversations, providers and figures, and is not advice.</p>
     <p>If you need someone to talk to right now, Samaritans of Singapore is open 24 hours on <a href="tel:1767">1767</a>.</p>
   </div>
@@ -1101,20 +1103,44 @@ $('shareBtn').addEventListener('click', async function(){
   catch (e) { st.textContent = 'Copy this link: ' + url; }
 });
 
-/* ---------- join form (preview only) ---------- */
+/* ---------- join form (submits to Formspree) ---------- */
 var who = 'individual';
+var whoHidden = $('who-hidden');
 document.querySelectorAll('.seg button').forEach(function(btn){
   btn.addEventListener('click', function(){
     who = btn.getAttribute('data-who');
+    whoHidden.value = who === 'community' ? 'A community or organisation' : 'An individual';
     document.querySelectorAll('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', String(b === btn)); });
   });
 });
-$('joinForm').addEventListener('submit', function(e){
+$('joinForm').addEventListener('submit', async function(e){
   e.preventDefault();
   var contact = $('jn-contact');
   var s = $('joinStatus');
+  var btn = this.querySelector('button[type="submit"]');
   if (!contact.value.trim()) { s.textContent = 'Please share a phone number, Telegram handle, or email.'; contact.focus(); return; }
-  s.textContent = "Sign-up isn't connected yet, because this is a preview. Nothing has been saved.";
+  var data = new FormData(this);
+  data.append('page', location.href);
+  btn.disabled = true;
+  s.textContent = 'Sending…';
+  try {
+    var res = await fetch(this.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    });
+    if (res.ok) {
+      s.textContent = "Thank you — you're on the list. We'll be in touch.";
+      contact.value = '';
+    } else {
+      var body = await res.json().catch(function(){ return null; });
+      s.textContent = (body && body.errors && body.errors[0] && body.errors[0].message) || 'Something went wrong. Please try again, or reach us another way.';
+    }
+  } catch (err) {
+    s.textContent = "Couldn't reach the server — check your connection and try again.";
+  } finally {
+    btn.disabled = false;
+  }
 });
 })();
 </script>
