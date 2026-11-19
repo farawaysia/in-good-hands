@@ -391,7 +391,13 @@ html.js .st-collage:not(.in) .pr{opacity:0;transform:translateY(20px) rotate(cal
 .sel-wrap{position:relative}
 .who-sel{-webkit-appearance:none;appearance:none;display:block;width:100%;box-sizing:border-box;min-height:58px;padding:0 54px 0 20px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.55);background:#FFF8EA;color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);font-weight:600;cursor:pointer}
 .sel-wrap svg{position:absolute;right:20px;top:50%;transform:translateY(-50%);pointer-events:none}
-.lit select:focus-visible{outline:3px solid #131846;outline-offset:3px}
+.lit select:focus-visible,.lit textarea:focus-visible{outline:3px solid #131846;outline-offset:3px}
+.lit textarea::placeholder{color:#6B5A4A;opacity:1}
+.fb-lbl{font-size:15px;font-weight:700;color:#131846}
+.fb-lbl span,.ea-opt{font-weight:500;color:#34427C}
+.fb-in{box-sizing:border-box;width:100%;min-height:52px;padding:0 16px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.3);background:rgba(255,255,255,0.78);color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,17px)}
+.fb-in::placeholder{color:#6B5A4A;opacity:1}
+.ea-err{font-size:13.5px;font-weight:600;color:#7A2308}
 /* ---- Narrower screens ---- */
 @container (max-width:960px){
   .ft2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1328,10 +1334,19 @@ a.j-call:active{transform:scale(0.98)}
           <sc-if value="{{isForm}}" hint-placeholder-val="{{true}}">
             <div style="display:flex;flex-direction:column;gap:22px;">
               <div style="display:flex;flex-direction:column;gap:8px;">
+                <label for="join-name" style="font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#131846;">Your name</label>
+                <input id="join-name" type="text" value="{{joinName}}" onChange="{{setJoinName}}" placeholder="e.g. Sarah Tan" autocomplete="name" style="box-sizing:border-box;width:100%;min-height:58px;padding:0 20px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.55);background:#FFF8EA;color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);">
+                <sc-if value="{{hasNameError}}" hint-placeholder-val="{{false}}">
+                  <div class="ea-err">Please tell us your name.</div>
+                </sc-if>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px;">
                 <label for="who-select" style="font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#131846;">Who are you?</label>
                 <div class="sel-wrap">
                   <select id="who-select" class="who-sel" value="{{who}}" onChange="{{setWho}}">
                     <option value="individual">An individual</option>
+                    <option value="bereaved">A bereaved individual</option>
                     <option value="community">A community or organisation</option>
                     <option value="provider">A funeral service provider</option>
                     <option value="lawyer">A lawyer</option>
@@ -1357,6 +1372,11 @@ a.j-call:active{transform:scale(0.98)}
                 <sc-if value="{{hasError}}" hint-placeholder-val="{{false}}">
                   <div style="font-size:13.5px;font-weight:600;color:#7A2308;">{{errorText}}</div>
                 </sc-if>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <label for="join-note" style="font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#131846;">Any feedback or thoughts? <span class="ea-opt">(optional)</span></label>
+                <textarea id="join-note" value="{{joinNote}}" onChange="{{setJoinNote}}" placeholder="What would help you most, what's missing, or how you'd like to be involved…" style="box-sizing:border-box;width:100%;min-height:120px;padding:14px 20px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.55);background:#FFF8EA;color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);line-height:1.5;resize:vertical;"></textarea>
               </div>
 
               <button type="button" onClick="{{submit}}" class="navy-btn" style="width:100%;box-sizing:border-box;min-height:58px;padding:0 24px;border-radius:999px;border:none;background:#131846;color:#FFE6CC;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(19,24,70,0.35);">Request early access</button>
@@ -1407,6 +1427,19 @@ a.j-call:active{transform:scale(0.98)}
         <div aria-live="polite" style="display:flex;flex-direction:column;gap:16px;">
           <sc-if value="{{isFeedbackForm}}" hint-placeholder-val="{{true}}">
             <div style="display:flex;flex-direction:column;gap:16px;">
+              <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:6px;">
+                  <label for="fb-name" class="fb-lbl">Your name</label>
+                  <input id="fb-name" class="fb-in" type="text" value="{{fbName}}" onChange="{{setFbName}}" placeholder="e.g. Sarah Tan" autocomplete="name">
+                  <sc-if value="{{fbNameError}}" hint-placeholder-val="{{false}}">
+                    <div class="ea-err">Please tell us your name.</div>
+                  </sc-if>
+                </div>
+                <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:6px;">
+                  <label for="fb-contact" class="fb-lbl">Phone, Telegram or email <span>(optional)</span></label>
+                  <input id="fb-contact" class="fb-in" type="text" value="{{fbContact}}" onChange="{{setFbContact}}" placeholder="So we can reply" autocomplete="off">
+                </div>
+              </div>
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <textarea id="feedback-box" aria-label="Your feedback" value="{{feedback}}" onChange="{{setFeedback}}" placeholder="What worked, what confused you, what's missing…" style="width:100%;box-sizing:border-box;min-height:clamp(140px,15vw,180px);padding:16px 18px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.3);background:rgba(255,255,255,0.78);color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);line-height:1.5;resize:vertical;"></textarea>
                 <sc-if value="{{feedbackError}}" hint-placeholder-val="{{false}}">
@@ -2480,7 +2513,7 @@ const HIW_MS = 9000;
 
 // Sign-ups and feedback go to the Formspree inbox when this page runs as the public website,
 // which sets window.IGH_FORM_URL. Inside the design canvas nothing is sent.
-const WHO = { individual: 'An individual', community: 'A community or organisation', provider: 'A funeral service provider', lawyer: 'A lawyer', counsellor: 'A counsellor', hr: 'An HR manager' };
+const WHO = { individual: 'An individual', bereaved: 'A bereaved individual', community: 'A community or organisation', provider: 'A funeral service provider', lawyer: 'A lawyer', counsellor: 'A counsellor', hr: 'An HR manager' };
 function sendForm(fields) {
   const url = typeof window !== 'undefined' && window.IGH_FORM_URL;
   if (!url) return Promise.resolve();
@@ -2809,12 +2842,18 @@ class Component extends DCLogic {
       setFeedback: (e) => this.setState({ feedback: e.target.value, feedbackError: false }),
       feedbackFail: !!this.state.feedbackFail,
       feedbackFailText: SEND_FAIL,
+      fbName: this.state.fbName ?? '',
+      fbContact: this.state.fbContact ?? '',
+      fbNameError: !!this.state.fbNameError,
+      setFbName: (e) => this.setState({ fbName: e.target.value, fbNameError: false }),
+      setFbContact: (e) => this.setState({ fbContact: e.target.value }),
       sendFeedback: () => {
         const text = (this.state.feedback ?? '').trim();
-        if (!text) { this.setState({ feedbackError: true }); return; }
+        const name = (this.state.fbName ?? '').trim();
+        if (!name || !text) { this.setState({ fbNameError: !name, feedbackError: !text }); return; }
         if (this._sendingFb) return;
         this._sendingFb = true;
-        sendForm({ form: 'Feedback', message: text, _subject: 'New In Good Hands feedback' })
+        sendForm({ form: 'Feedback', name, contact: (this.state.fbContact ?? '').trim(), message: text, _subject: 'New In Good Hands feedback from ' + name })
           .then(() => this.setState({ feedbackSent: true, feedbackFail: false }))
           .catch(() => this.setState({ feedbackFail: true }))
           .finally(() => { this._sendingFb = false; });
@@ -2852,14 +2891,20 @@ class Component extends DCLogic {
       hasError: error.length > 0,
       errorText: error,
       setContact: (e) => this.setState({ contact: e.target.value, error: '' }),
+      joinName: this.state.joinName ?? '',
+      joinNote: this.state.joinNote ?? '',
+      hasNameError: !!this.state.nameError,
+      setJoinName: (e) => this.setState({ joinName: e.target.value, nameError: false }),
+      setJoinNote: (e) => this.setState({ joinNote: e.target.value }),
       submit: () => {
+        const name = (this.state.joinName ?? '').trim();
         const val = (this.state.contact ?? '').trim();
         const msg = validate(this.state.via ?? 'phone', val);
-        if (msg) { this.setState({ error: msg }); return; }
+        if (!name || msg) { this.setState({ nameError: !name, error: msg }); return; }
         if (this._sendingJoin) return;
         this._sendingJoin = true;
         const whoKey = this.state.who ?? 'individual';
-        sendForm({ form: 'Early access', who: WHO[whoKey] || whoKey, via: this.state.via ?? 'phone', contact: val, _subject: 'New In Good Hands early-access signup' })
+        sendForm({ form: 'Early access', name, who: WHO[whoKey] || whoKey, via: this.state.via ?? 'phone', contact: val, message: (this.state.joinNote ?? '').trim(), _subject: 'New In Good Hands early-access signup from ' + name })
           .then(() => this.setState({ joined: true }))
           .catch(() => this.setState({ error: SEND_FAIL }))
           .finally(() => { this._sendingJoin = false; });

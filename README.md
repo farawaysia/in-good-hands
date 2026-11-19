@@ -1,5 +1,7 @@
 # In Good Hands
 
+Live at https://youre-in-good-hands.vercel.app/
+
 The landing page for **In Good Hands**, which helps families in Singapore before, during and after a loss.
 
 The site is static: `index.html` plus the pictures in `images/`. Vercel serves it as-is; there is no build step on Vercel.
@@ -17,4 +19,4 @@ To update the site after changing the design: copy the new `.dc.html` files into
 
 ## Forms
 
-The early-access sign-up and the feedback box both post to the Formspree form `xkjgbozd` (set as `FORM_URL` in `build.py`). Each submission has a `form` field, either `Early access` or `Feedback`, so you can tell them apart in the Formspree inbox. Early-access entries also carry `who`, `via` and `contact`; feedback entries carry `message`. Every entry includes the `page` it came from.
+The early-access sign-up and the feedback box both post to the Formspree form `xkjgbozd` (set as `FORM_URL` in `build.py`). Each submission has a `form` field, either `Early access` or `Feedback`, so you can tell them apart in the Formspree inbox. Both carry the person's `name`. Early-access entries also carry `who`, `via`, `contact` and an optional `message`; feedback entries carry `message` and an optional `contact`. Every entry includes the `page` it came from.
