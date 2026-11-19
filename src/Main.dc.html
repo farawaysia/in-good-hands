@@ -1,0 +1,1601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In Good Hands — Landing Page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:auto}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:#05070F}
+a{color:inherit}
+.sky{background:#05070F url(/_blob/6b2dcae06b386386c7a5b2d03693b12f) center top/cover no-repeat}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #FFE6CC;outline-offset:3px}
+.cta{transition:transform .2s ease,background .2s ease}
+.cta:hover{background:#F8B67C !important;transform:translateY(-2px)}
+.cta.cta-navy:hover{background:#26307A !important}
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;padding:0 22px;border-radius:999px;border:1.5px solid #F0A262;background:transparent;color:#F0A262;font-size:15px;font-weight:700;text-decoration:none;white-space:nowrap;transition:background .25s ease,color .25s ease,border-color .25s ease}
+.nav-cta[data-solid="1"]{background:#F0A262;color:#131846}
+.nav-cta:hover{background:#F8B67C;border-color:#F8B67C;color:#131846}
+.ghost{transition:background .2s ease}
+.ghost:hover{background:rgba(238,154,87,0.2) !important}
+input::placeholder,textarea::placeholder{color:#B98558;opacity:1}
+.lit button:focus-visible,.lit input:focus-visible{outline:3px solid #131846;outline-offset:3px}
+.lit input::placeholder{color:#6B5A4A;opacity:1}
+.navy-btn{transition:transform .2s ease,background .2s ease}
+.navy-btn:hover{background:#262F78 !important;transform:translateY(-2px)}
+@keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
+.glow{animation:breathe 7s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.glow{animation:none}}
+
+/* ---- Reveal: text and cards rise softly into place as they scroll into view ---- */
+html.js [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s ease var(--d,0ms),transform 1s cubic-bezier(.22,.9,.24,1) var(--d,0ms)}
+html.js [data-reveal].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js [data-reveal]{opacity:1;transform:none;transition:none}}
+/* ---- Hero: the name and tagline glow on the night sky ---- */
+.hero-h1{margin:0;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,2vw,26px);text-align:center}
+.hero-name{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(60px,10.5vw,148px);line-height:1;letter-spacing:-0.02em;color:#FFF4DE;text-shadow:0 0 6px rgba(255,226,170,0.85),0 0 24px rgba(255,196,120,0.75),0 0 60px rgba(240,150,80,0.6),0 0 130px rgba(224,120,50,0.45);animation:heroGlow 7s ease-in-out infinite}
+.hero-tag{display:block;max-width:900px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(22px,3.2vw,44px);line-height:1.2;color:#FFE6CC;text-shadow:0 0 10px rgba(255,214,160,0.7),0 0 34px rgba(240,150,80,0.5);text-wrap:balance}
+.hero-sub{margin:clamp(18px,2.2vw,28px) 0 0;max-width:620px;text-align:center;font-size:clamp(16px,1.5vw,19px);line-height:1.6;font-weight:500;color:#F6DFC6;text-wrap:balance;text-shadow:0 1px 14px rgba(5,7,15,0.85)}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 26px;margin-top:clamp(28px,3.6vw,44px)}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 32px;border-radius:999px;background:#F0A262;color:#131846;font-size:clamp(16px,1.5vw,17px);font-weight:700;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(255,214,160,0.6),0 0 44px rgba(240,162,98,0.4),0 10px 30px rgba(0,0,0,0.35);transition:transform .2s ease,background .2s ease}
+.hero-cta:hover{background:#F8B67C;transform:translateY(-2px)}
+.hero-link{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;color:#FFE6CC;font-size:16px;font-weight:600;text-decoration:underline;text-decoration-color:rgba(255,230,204,0.4);text-underline-offset:5px;transition:text-decoration-color .2s ease}
+.hero-link:hover{text-decoration-color:#FFE6CC}
+@keyframes heroGlow{0%,100%{text-shadow:0 0 6px rgba(255,226,170,0.85),0 0 24px rgba(255,196,120,0.75),0 0 60px rgba(240,150,80,0.6),0 0 130px rgba(224,120,50,0.45)}50%{text-shadow:0 0 8px rgba(255,232,184,0.95),0 0 32px rgba(255,204,132,0.9),0 0 80px rgba(240,158,88,0.75),0 0 160px rgba(224,124,54,0.6)}}
+@media (prefers-reduced-motion:reduce){.hero-name{animation:none}}
+/* ---- How it works: steps beside a live demo, in the manner of a guided tour. The active step fills its rail, then the next one begins ---- */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#F0A262}
+.eyebrow.dk{color:#8A4310}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:currentColor}
+.eyebrow{text-wrap:balance}
+@media (max-width:480px){.eyebrow.ctr{justify-content:center;text-align:center}.eyebrow.ctr::before{display:none}}
+.hiw-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(32px,5vw,64px);text-align:left}
+@media (max-width:820px){.hiw-top{grid-template-columns:minmax(0,1fr);align-items:start}}
+.hiw-acc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:clamp(32px,5vw,80px);align-items:center}
+.hiw-left{display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-width:0}
+.hiw-pause{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-left:30px;padding:0 18px;border-radius:999px;border:1px solid rgba(240,162,98,0.55);background:rgba(9,14,48,0.5);color:#FFD7B0;font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .2s ease}
+.hiw-pause:hover{background:rgba(240,162,98,0.2)}
+.hiw-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hiw-item{position:relative;padding:16px 0 16px 30px;opacity:.86;transition:opacity .45s ease}
+.hiw-item:hover{opacity:.97 !important}
+.hiw-rail{position:absolute;left:0;top:8px;bottom:8px;width:2px;border-radius:2px;background:rgba(240,200,160,0.24);overflow:hidden}
+.hiw-rail i{display:block;width:100%;height:100%;transform-origin:top;background:linear-gradient(180deg,#FFD9A6,#F0A262)}
+.hiw-head{display:flex;align-items:flex-start;gap:18px;width:100%;margin:0;padding:0;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.hiw-head:focus-visible{outline:2px solid #F7C08E;outline-offset:6px;border-radius:12px}
+.hiw-ico{flex:none;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;border:1px solid rgba(240,162,98,0.4);background:rgba(240,162,98,0.12);color:#F0A262}
+.hiw-txt{display:flex;flex-direction:column;gap:5px;min-width:0}
+.hiw-no{font-size:14px;font-weight:700;letter-spacing:0.14em;color:#F7B98A}
+.hiw-ttl{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.8vw,34px);font-weight:600;line-height:1.12;color:#FFE6CC;text-wrap:balance}
+.hiw-sum{max-width:520px;font-size:clamp(15.5px,1.4vw,17px);line-height:1.6;color:#F0C9A4;text-wrap:pretty}
+.hiw-more{display:grid;grid-template-rows:0fr;opacity:0;margin-left:62px;transition:grid-template-rows .5s ease,opacity .4s ease}
+.hiw-more-in{min-height:0;overflow:hidden}
+.hiw-more-in>*:first-child{margin-top:14px}
+.hiw-lead{margin:0 0 10px;max-width:520px;font-size:clamp(15.5px,1.4vw,17px);line-height:1.6;color:#F0C9A4}
+.hiw-demo{box-sizing:border-box;width:100%}
+.hiw-stage{display:grid;justify-items:center}
+.hiw-slide{grid-area:1/1;width:100%;display:flex;justify-content:center;transition:opacity .55s ease,transform .7s cubic-bezier(.22,.9,.24,1)}
+.hiw-phone{position:relative;box-sizing:border-box;width:100%;max-width:340px;min-height:620px;overflow:hidden;padding:16px 14px;border-radius:38px;border:1.5px solid rgba(238,154,87,0.55);background:linear-gradient(180deg,#0F1336 0%,#080B22 100%);box-shadow:0 0 0 7px #05070F,0 0 0 8px rgba(238,154,87,0.22),0 0 70px rgba(240,150,80,0.28),0 34px 80px rgba(0,0,0,0.6)}
+@media (max-width:900px){.hiw-acc{grid-template-columns:minmax(0,1fr);gap:28px}.hiw-demo{order:-1;max-width:460px;margin:0 auto}.hiw-steps{box-sizing:border-box;padding:8px 14px;border-radius:22px;background:rgba(8,12,40,0.5)}}
+@keyframes hiwLine{0%,100%{transform:scaleX(.42)}50%{transform:scaleX(1)}}
+@keyframes hiwTwinkle{0%,100%{transform:scale(.84) rotate(0deg)}50%{transform:scale(1.1) rotate(10deg)}}
+@keyframes hiwTick{0%{stroke-dashoffset:16}38%,82%{stroke-dashoffset:0}100%{stroke-dashoffset:16}}
+@keyframes hiwHoldL{0%,100%{transform:translateY(1.2px)}50%{transform:translateY(-1.6px)}}
+@keyframes hiwHoldR{0%,100%{transform:translateY(-1.6px)}50%{transform:translateY(1.2px)}}
+.ico-l{transform-box:fill-box;transform-origin:left center;animation:hiwLine 2.6s ease-in-out infinite}
+.ico-s{transform-box:fill-box;transform-origin:center;animation:hiwTwinkle 3.2s ease-in-out infinite}
+.ico-t{stroke-dasharray:16;animation:hiwTick 3.2s ease-in-out infinite}
+.ico-hl{animation:hiwHoldL 3s ease-in-out infinite}
+.ico-hr{animation:hiwHoldR 3s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.hiw-pause{display:none}.hiw-item,.hiw-more,.hiw-slide{transition:none}.ico-l,.ico-s,.ico-t,.ico-hl,.ico-hr{animation:none}.ico-t{stroke-dashoffset:0}}
+.hiw-li{display:flex;gap:12px;align-items:flex-start;margin:0;font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:#FFE6CC}
+.hiw-li i{flex:none;width:7px;height:7px;margin-top:0.72em;border-radius:50%;background:#F0A262}
+.hiw-tag{display:inline-flex;align-items:center;padding:6px 13px;border-radius:999px;border:1px solid rgba(238,154,87,0.55);background:rgba(238,154,87,0.08);color:#F7C08E;font-size:14.5px;font-weight:600;line-height:1.3}
+/* the mock phone screens */
+.mk{display:flex;flex-direction:column;gap:9px}
+.mk-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 4px 11px;margin-bottom:10px;border-bottom:1px solid rgba(238,154,87,0.22)}
+.mk-brand{display:flex;align-items:center;gap:7px;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:600;color:#FFE6CC}
+.mk-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;border:1px solid rgba(238,154,87,0.5);font-size:11.5px;font-weight:600;color:#F7C08E}
+.mk-dot{width:7px;height:7px;border-radius:50%;background:#EE9A57}
+.mk-dot.h{background:#FFE6CC}
+.mk-lbl{display:flex;align-items:center;gap:6px;margin:2px 0 -3px 2px;font-size:11.5px;font-weight:600;letter-spacing:0.04em;color:#E3B891}
+.mk-ai{align-self:flex-start;max-width:92%;box-sizing:border-box;padding:10px 13px;border-radius:16px 16px 16px 5px;border:1px solid rgba(238,154,87,0.4);background:rgba(238,154,87,0.07);color:#FFE6CC;font-size:13.5px;line-height:1.5}
+.mk-ai.h{border-color:rgba(255,230,204,0.5);background:rgba(255,230,204,0.07)}
+.mk-me{align-self:flex-end;max-width:86%;box-sizing:border-box;padding:9px 13px;border-radius:16px 16px 5px 16px;border:1px solid rgba(238,154,87,0.7);background:rgba(238,154,87,0.2);color:#FFF3E3;font-size:13.5px;line-height:1.5}
+.mk-chips{display:flex;flex-wrap:wrap;gap:7px}
+.mk-chip{padding:7px 12px;border-radius:999px;border:1.5px solid #EE9A57;background:rgba(238,154,87,0.07);color:#F7C08E;font-size:12.5px;font-weight:600;line-height:1.3}
+.mk-chip.on{background:#F0A262;border-color:#F0A262;color:#131846}
+.mk-prog{display:flex;flex-direction:column;gap:5px;margin-bottom:2px}
+.mk-prog b{font-size:12.5px;font-weight:600;color:#E3B891}
+.mk-track{height:6px;border-radius:4px;background:rgba(238,154,87,0.2);overflow:hidden}
+.mk-track i{display:block;height:100%;border-radius:4px;background:#F0A262}
+.mk-lit{box-sizing:border-box;padding:14px;border-radius:16px;background:radial-gradient(ellipse 90% 130% at 50% 32%,#FFE8BE 0%,#FBCB86 38%,#F0A25F 72%,#D07533 100%);color:#131846;box-shadow:0 0 36px rgba(240,150,80,0.35)}
+.mk-lit b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;font-weight:700;line-height:1.15}
+.mk-lit span{display:block;margin-top:3px;font-size:13px;font-weight:500;line-height:1.45;color:#1E2352}
+.mk-call{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:11px;min-height:44px;border-radius:999px;background:#131846;color:#FFE6CC;font-size:14px;font-weight:700}
+.mk-card{box-sizing:border-box;padding:12px 13px;border-radius:14px;border:1px solid rgba(238,154,87,0.55);background:rgba(238,154,87,0.07)}
+.mk-card.rec{border:2px solid #F0A262;background:linear-gradient(180deg,rgba(240,162,98,0.24) 0%,rgba(240,162,98,0.07) 100%);box-shadow:0 0 30px rgba(240,162,98,0.28)}
+.mk-rib{display:inline-block;padding:4px 11px;border-radius:999px;background:#F0A262;color:#131846;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase}
+.mk-name{margin-top:8px;font-family:'Cormorant Garamond',Georgia,serif;font-size:27px;font-weight:700;line-height:1.1;color:#FFF3E3}
+.mk-price{font-size:16px;font-weight:700;color:#FFD3A8}
+.mk-sub{margin-top:9px;padding-top:8px;border-top:1px solid rgba(238,154,87,0.3);font-size:13px;font-weight:700;color:#FFE6CC}
+.mk-tick{display:flex;gap:8px;align-items:flex-start;margin-top:4px;font-size:12.5px;line-height:1.45;color:#FFE6CC}
+.mk-tick svg{flex:none;margin-top:2px}
+.mk-kv{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid rgba(238,154,87,0.16);font-size:12.5px;color:#E3B891}
+.mk-kv b{font-weight:600;color:#FFE6CC;text-align:right}
+.mk-caut{margin-top:7px;font-size:12px;line-height:1.45;color:#D9A47C}
+.mk-task{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid rgba(238,154,87,0.16);font-size:13px;line-height:1.4;color:#FFE6CC}
+.mk-task:first-child{border-top:none}
+.mk-task small{display:block;margin-top:1px;font-size:11.5px;color:#E3B891}
+.mk-box{flex:none;width:18px;height:18px;margin-top:1px;box-sizing:border-box;border-radius:50%;border:1.5px solid #EE9A57;display:inline-flex;align-items:center;justify-content:center}
+.mk-box.done{background:#3F7F4B;border-color:#3F7F4B}
+.mk-ask{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#FFB88A}
+.mk-ok{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#BFE3C0}
+.mk-row{display:flex;flex-direction:column;gap:1px;padding:7px 0;border-top:1px solid rgba(238,154,87,0.16);font-size:12.5px;line-height:1.45;color:#FFE6CC}
+.mk-row:first-of-type{border-top:none}
+.mk-input{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:40px;box-sizing:border-box;padding:0 12px;border-radius:999px;border:1.5px solid rgba(238,154,87,0.6);background:#07091A;color:#C9A98A;font-size:12.5px}
+/* ---- The problem: interview findings beside the matching survey figures (container queries, so it also holds inside the mobile preview) ---- */
+.pf-row,.pf-head{display:grid;grid-template-columns:1fr 56px 1fr;align-items:stretch}
+.pf-link{display:flex;align-items:center;justify-content:center}
+.pf-dot{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1.5px solid #F0A262;background:#080B20;box-shadow:0 0 18px rgba(240,162,98,0.35)}
+.pf-tag{display:none}
+@container pf (max-width:640px){
+  .pf-row,.pf-head{grid-template-columns:1fr}
+  .pf-head{display:none}
+  .pf-link{height:44px}
+  .pf-link svg{transform:rotate(90deg)}
+  .pf-tag{display:inline-flex}
+}
+/* ---- Frozen section tabs ---- */
+.anchor{scroll-margin-top:92px}
+@media (max-width:1180px){.anchor{scroll-margin-top:112px}}
+/* The bar is frosted glass: a dark pane and a cream pane crossfade as the page behind it brightens
+   (--t runs from 0 on the night sky to 1 once the sunrise has come up; the script sets it as you scroll) */
+.site-head{--t:0;position:relative;isolation:isolate;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:0 clamp(20px,4.5vw,64px);background:transparent;-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3)}
+.site-head::before,.site-head::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events:none;box-sizing:border-box;transition:opacity .2s linear}
+.site-head::before{background:linear-gradient(180deg,rgba(6,8,22,0.66) 0%,rgba(6,8,22,0.46) 100%);border-bottom:1px solid rgba(238,154,87,0.16);opacity:calc(1 - var(--t))}
+.site-head::after{background:linear-gradient(180deg,rgba(255,248,236,0.72) 0%,rgba(255,243,224,0.52) 100%);border-bottom:1px solid rgba(19,24,70,0.08);box-shadow:0 10px 30px rgba(19,24,70,0.07);opacity:var(--t)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .site-head::before{background:rgba(6,8,22,0.9)}
+  .site-head::after{background:rgba(255,246,232,0.94)}
+}
+.site-logo{position:relative;min-height:72px}
+.site-logo img{transition:opacity .3s ease}
+@supports ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+  .site-logo::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background:#131846;-webkit-mask:url(/_blob/71e427f68a463d7c8749cb4c8dfe689f) center / contain no-repeat;mask:url(/_blob/71e427f68a463d7c8749cb4c8dfe689f) center / contain no-repeat;opacity:0;transition:opacity .3s ease}
+  .site-head[data-tone="light"] .site-logo img{opacity:0}
+  .site-head[data-tone="light"] .site-logo::after{opacity:1}
+}
+.site-nav{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-width:0;gap:2px}
+.nav-tab{position:relative;flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 13px;border-radius:999px;color:#F0C9A4;font-size:14.5px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s ease,color .2s ease}
+.nav-tab:hover{background:rgba(238,154,87,0.16);color:#FFE6CC}
+/* the line under the tab for the section you are reading */
+.nav-tab::after{content:"";position:absolute;left:13px;right:13px;bottom:7px;height:2px;border-radius:2px;background:#F0A262;transform:scaleX(0);transform-origin:center;opacity:0;transition:transform .35s cubic-bezier(.22,.9,.24,1),opacity .25s ease,background .25s ease}
+.nav-tab[data-active="1"]{color:#FFE6CC}
+.nav-tab[data-active="1"]::after{transform:scaleX(1);opacity:1}
+/* once the page behind the bar is bright, everything on it turns dark-on-light */
+.site-head[data-tone="light"] .nav-tab{color:#2A3170}
+.site-head[data-tone="light"] .nav-tab:hover{background:rgba(19,24,70,0.08);color:#131846}
+.site-head[data-tone="light"] .nav-tab[data-active="1"]{color:#131846}
+.site-head[data-tone="light"] .nav-tab::after{background:#131846}
+.site-head[data-tone="light"] .nav-cta{background:#131846;border-color:#131846;color:#FFE6CC}
+.site-head[data-tone="light"] .nav-cta:hover{background:#26307A;border-color:#26307A;color:#FFE6CC}
+.site-head[data-tone="light"] a:focus-visible{outline-color:#131846}
+@media (prefers-reduced-motion:reduce){.site-head::before,.site-head::after,.nav-tab::after,.site-logo img,.site-logo::after{transition:none}}
+@container site (max-width:1180px){
+  .site-head{flex-wrap:wrap;align-content:flex-start;row-gap:0;min-height:0}
+  .site-logo{order:1;min-height:56px}
+  .site-logo img{height:46px !important}
+  .head-btns{order:2}
+  .nav-cta{min-height:44px !important;padding:0 14px !important;font-size:14px !important}
+  .site-nav{order:3;flex:0 0 100%;height:48px;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+  .nav-tab{min-height:44px;padding:0 11px;font-size:14px}
+  .nav-tab::after{left:11px;right:11px}
+  .site-nav::-webkit-scrollbar{display:none}
+  .site-nav[data-more="1"]{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent 100%)}
+}
+/* ---- The problem: the matched pairs, one at a time ---- */
+.cr{display:flex;flex-direction:column;gap:18px}
+.cr-view{overflow:hidden;border-radius:20px}
+.cr-track{display:flex;align-items:stretch;transition:transform .45s ease}
+.cr-slide{flex:0 0 100%;min-width:0;box-sizing:border-box;display:flex;flex-direction:column}
+.cr-slide>.pf-row{flex:1 1 auto}
+.cr-ctrl{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,24px)}
+.cr-btn{display:inline-flex;align-items:center;justify-content:center;flex:none;width:48px;height:48px;padding:0;border-radius:50%;border:1.5px solid #F0A262;background:transparent;cursor:pointer;transition:background .2s ease}
+.cr-btn:hover{background:rgba(238,154,87,0.2)}
+.cr-dots{display:flex;align-items:center}
+.cr-d{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer}
+.cr-d i{display:block;width:10px;height:10px;box-sizing:border-box;border-radius:5px;border:1.5px solid #F0A262;transition:width .25s ease}
+.cr-d[aria-current="true"] i{width:26px;background:#F0A262}
+@media (prefers-reduced-motion:reduce){.cr-track,.cr-btn,.cr-d i{transition:none}}
+@container pf (max-width:640px){
+  .pf-link{height:40px}
+}
+.pf-cell{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:clamp(16px,2.4vw,28px);border-radius:24px;text-align:center}
+.pf-cell.l{border:1px solid rgba(238,154,87,0.4);background:rgba(238,154,87,0.06)}
+.pf-cell.r{gap:16px;border:1px solid rgba(238,154,87,0.55);background:rgba(10,13,36,0.72);box-shadow:0 0 50px rgba(238,154,87,0.1)}
+.pf-ico{flex:none;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;border:1.5px solid #F0A262}
+.pf-find{margin:0;max-width:420px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(21px,2.4vw,30px);font-weight:600;line-height:1.2;color:#FFE6CC;text-wrap:balance}
+.pf-stat{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pf-num{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(44px,5.4vw,64px);font-weight:600;line-height:1;color:#F0A262}
+.pf-cap{margin:0;max-width:340px;font-size:clamp(15px,1.5vw,18px);line-height:1.45;color:#FFE6CC}
+.pf-bar{width:100%;max-width:320px;height:8px;margin-top:4px;border-radius:4px;background:rgba(238,154,87,0.2);overflow:hidden}
+.pf-bar i{display:block;height:100%;border-radius:4px;background:#F0A262}
+.pf-duo{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.pf-duo>.pf-stat+.pf-stat{padding-left:16px;border-left:1px solid rgba(238,154,87,0.25)}
+.pf-note{margin:0;width:100%;padding-top:12px;border-top:1px solid rgba(238,154,87,0.25);font-size:14px;line-height:1.5;color:#E3B891}
+.pf-step{font-size:14px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#F7B98A}
+.pf-quote{margin:0;max-width:440px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(18px,1.9vw,23px);line-height:1.35;color:#F7DDBF;text-wrap:pretty}
+.pf-who{margin:-4px 0 0;font-size:14px;font-weight:600;letter-spacing:0.03em;color:#E3B891}
+/* ---- Why Now and Why In Good Hands: points toggled left and right ---- */
+.why-title{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(52px,8vw,112px);line-height:1;letter-spacing:-0.02em;color:#131846}
+.why-title span{display:inline-block}
+.why-title em{font-style:italic;font-weight:500}
+.wy-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px}
+.wy-switch{display:inline-flex;padding:5px;border-radius:999px;background:rgba(255,255,255,0.6);border:1px solid rgba(19,24,70,0.16);box-shadow:0 10px 30px rgba(40,50,120,0.18)}
+.wy-sw{min-height:48px;padding:0 clamp(22px,2.6vw,34px);border-radius:999px;border:0;background:transparent;color:#131846;font-family:inherit;font-size:clamp(15px,1.4vw,17px);font-weight:700;cursor:pointer;transition:background .25s ease,color .25s ease}
+.wy-sw:hover{background:rgba(19,24,70,0.08)}
+.wy-sw[aria-pressed="true"]{background:#131846;color:#FFE6CC}
+.wy-sw:focus-visible{outline:3px solid #131846;outline-offset:3px}
+.wy-stack{display:grid}
+.wy-stack>.wy-panel{grid-area:1/1}
+@media (prefers-reduced-motion:reduce){.wy-stack>.wy-panel{transition:none !important}}
+.wy-panel{display:grid;grid-template-columns:minmax(260px,34%) minmax(0,1fr);overflow:hidden;border-radius:24px;background:radial-gradient(ellipse 90% 130% at 50% 28%,#FFFFFF 0%,#FFFDF7 55%,#FFF7E3 100%);box-shadow:0 0 0 1px rgba(255,244,214,0.9),inset 0 1px 0 rgba(255,255,255,0.9),0 0 80px 10px rgba(255,236,170,0.55),0 24px 70px rgba(40,50,120,0.28)}
+.wy-pic{position:relative;min-height:400px;display:flex;align-items:flex-end;padding:clamp(24px,2.8vw,40px);box-sizing:border-box}
+.wy-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,12,40,0.62) 0%,rgba(8,12,40,0) 62%);pointer-events:none}
+.wy-pic-now{background:url(/_blob/808c519cf0ddc0bd3f1a176a302bca3f) center/cover no-repeat #10143A}
+.wy-pic-igh{background:url(/_blob/4b01f3030007056a1823122360a8d8a4) center/cover no-repeat #BCD9F2}
+.wy-pic-igh::after{background:linear-gradient(0deg,rgba(255,255,255,0.40) 0%,rgba(255,255,255,0) 60%)}
+.wy-pic-igh .wy-name{color:#131846;text-shadow:0 1px 20px rgba(255,255,255,0.6)}
+.wy-name{position:relative;z-index:1;margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(46px,5vw,76px);line-height:1;letter-spacing:-0.01em;color:#FFC48C;text-wrap:balance}
+.wy-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:clamp(28px,3.4vw,52px) 0}
+.wy-col{display:flex;flex-direction:column;gap:14px;padding:0 clamp(18px,2.2vw,32px)}
+.wy-col+.wy-col{border-left:1px solid rgba(19,24,70,0.14)}
+.wy-num{font-size:14px;font-weight:700;letter-spacing:0.14em;color:#8A4310}
+.wy-t{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,2vw,27px);font-weight:600;line-height:1.28;color:#131846;text-wrap:balance}
+.wy-ti{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(25px,2.3vw,31px);font-weight:700;line-height:1.15;color:#131846}
+.wy-tx{margin:0;font-size:clamp(16px,1.3vw,18px);line-height:1.55;font-weight:500;color:#1E2352;text-wrap:pretty}
+@media (max-width:1100px){.wy-panel{grid-template-columns:minmax(0,1fr)}.wy-pic{min-height:220px}}
+@media (max-width:700px){.wy-switch{width:100%}.wy-sw{flex:1 1 0;padding:0 12px}.wy-cols{grid-template-columns:minmax(0,1fr);padding:6px 0 14px}.wy-col{padding:20px 22px}.wy-col+.wy-col{border-left:0;border-top:1px solid rgba(19,24,70,0.14)}}
+/* ---- Contact Us (compact) ---- */
+.ft-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(36px,6vw,96px);align-items:start}
+.ft-left{display:flex;flex-direction:column;align-items:flex-start}
+.ft-blurb{margin:14px 0 0;max-width:340px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(20px,1.8vw,24px);line-height:1.3;color:#34427C}
+.ft-h{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3vw,38px);font-weight:600;line-height:1.1;letter-spacing:-0.01em;color:#131846}
+.ft-left .ft-h{margin-top:clamp(32px,4vw,48px)}
+.ft-list{margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ft-note{margin:18px 0 0;max-width:340px;font-size:17px;line-height:1.55;color:#131846;text-wrap:pretty}
+.ft-note a,.ft-li a{color:#131846;text-decoration:underline;text-underline-offset:4px}
+.ft-li{margin:0;display:flex;align-items:baseline;gap:18px;font-size:17px;line-height:1.4;color:#131846}
+.ft-li span{flex:none;min-width:84px;font-size:14px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#4B3E96}
+.ft-right{display:flex;flex-direction:column;gap:12px}
+.ft-sub{margin:0 0 6px;font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:#34427C;text-wrap:pretty}
+.ft-bottom{margin-top:clamp(40px,5vw,64px);padding-top:20px;border-top:1px solid rgba(19,24,70,0.16)}
+.ct-foot{margin:0;font-size:14px;line-height:1.5;color:#34427C}
+@media (max-width:820px){.ft-grid{grid-template-columns:minmax(0,1fr)}}
+/* ---- Section skies: night, then sunrise, then full sun (pictures supplied for the redesign) ---- */
+/* Our Solution: top of the night picture. A navy veil keeps cream text readable; the bottom deepens so Try It Yourself can begin its own sky */
+.sky-night-a{background:linear-gradient(180deg,rgba(80,89,154,0) calc(100% - 220px),rgba(80,89,154,0.7) 100%),radial-gradient(ellipse 560px 200px at 50% 200px,rgba(9,14,48,0.45),rgba(9,14,48,0) 100%),radial-gradient(ellipse 660px 600px at 26% 62%,rgba(9,14,48,0.44),rgba(9,14,48,0) 100%),radial-gradient(ellipse 620px 130px at 50% calc(100% - 84px),rgba(9,14,48,0.5),rgba(9,14,48,0) 100%),linear-gradient(180deg,#05070F 0%,rgba(5,7,15,0) 300px),linear-gradient(180deg,rgba(126,128,206,0) 8%,rgba(126,128,206,0.20) 40%,rgba(126,128,206,0.36) 75%,rgba(126,128,206,0.47) 100%),linear-gradient(180deg,rgba(9,14,48,0.36) 0%,rgba(9,14,48,0.16) 50%,rgba(9,14,48,0) 85%),url(/_blob/c2dbb42fef648cd6fb06a0bd21cbf6a8) 58% 0/cover no-repeat #1B2760}
+/* Solution + Try It Yourself: the night sky lightens through dusk, then turns orange in Try It Yourself and runs on into the sunrise */
+.sky-night-b{background:linear-gradient(180deg,rgba(80,89,154,0.7) 0%,rgba(80,89,154,0) 220px),radial-gradient(ellipse 380px 72px at 50% 66px,rgba(9,14,48,0.55),rgba(9,14,48,0) 100%),radial-gradient(ellipse 760px 170px at 50% 170px,rgba(9,14,48,0.58),rgba(9,14,48,0.5) 45%,rgba(9,14,48,0) 100%),linear-gradient(180deg,rgba(246,196,124,0) calc(100% - 220px),rgba(246,196,124,0.92) 100%),url(/_blob/e6ee9cc14c205d4b6a695d323f650da0) 50% 0/cover no-repeat #B890A8}
+/* Why Now + Why In Good Hands: the orange middle of the picture */
+.sky-sunrise{background:linear-gradient(180deg,rgba(246,196,124,0.96) 0%,rgba(246,196,124,0) 240px),linear-gradient(180deg,rgba(254,223,120,0) calc(100% - 260px),#FEDF78 100%),url(/_blob/336d5700703934022e4418715b1deff6) 50% 0/cover no-repeat #F3C98A}
+/* Early access: a plain, pale pastel blue sky once the FAQ clouds have passed */
+.sky-blue{background:radial-gradient(ellipse 70% 45% at 50% 44%,rgba(255,255,255,0.40),rgba(255,255,255,0) 100%),linear-gradient(180deg,#D3E6F7 0%,#C5DFF5 42%,#CFE6F7 100%)}
+@media (max-width:700px){.sky{background-position:90% top}}
+.sky-problem{background:linear-gradient(180deg,rgba(12,10,27,0) calc(100% - 170px),#0C0A1B 100%),linear-gradient(180deg,#05070F 0%,rgba(5,7,15,0) 180px),url(/_blob/704094c68355547d0950d328c779cdfc) 50% 0/cover no-repeat #05070F}
+@media (max-width:700px){.sky-problem{background-position:62% 100%}}
+/* controls and lines on the light sections */
+#why>svg path{stroke:rgba(91,62,150,0.16)}
+#why :focus-visible,#join :focus-visible,#contact :focus-visible{outline-color:#131846}
+#feedback textarea::placeholder{color:#6B5A4A;opacity:1}
+/* ---- Our story + FAQ: a calm cream between the sunrise and the sun ---- */
+.sky-story{background:linear-gradient(180deg,#0C0A1B 0%,rgba(12,10,27,0) 200px),radial-gradient(ellipse 760px 380px at 20% 52%,rgba(70,56,140,0.26),rgba(70,56,140,0) 100%),linear-gradient(180deg,#0C0A1B 0%,#0A0D2A 52%,#05070F 100%)}
+.sky-story::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;background-image:radial-gradient(1.5px 1.5px at 7% 18%,rgba(255,236,208,0.8),rgba(255,236,208,0) 60%),radial-gradient(1px 1px at 15% 64%,rgba(255,236,208,0.55),rgba(255,236,208,0) 60%),radial-gradient(1.6px 1.6px at 26% 9%,rgba(255,236,208,0.7),rgba(255,236,208,0) 60%),radial-gradient(1px 1px at 38% 78%,rgba(255,236,208,0.5),rgba(255,236,208,0) 60%),radial-gradient(1.2px 1.2px at 47% 22%,rgba(255,236,208,0.6),rgba(255,236,208,0) 60%),radial-gradient(1.4px 1.4px at 58% 88%,rgba(255,236,208,0.65),rgba(255,236,208,0) 60%),radial-gradient(1px 1px at 66% 12%,rgba(255,236,208,0.55),rgba(255,236,208,0) 60%),radial-gradient(1.6px 1.6px at 74% 56%,rgba(255,236,208,0.7),rgba(255,236,208,0) 60%),radial-gradient(1px 1px at 83% 30%,rgba(255,236,208,0.5),rgba(255,236,208,0) 60%),radial-gradient(1.4px 1.4px at 91% 74%,rgba(255,236,208,0.65),rgba(255,236,208,0) 60%),radial-gradient(1.2px 1.2px at 95% 14%,rgba(255,236,208,0.6),rgba(255,236,208,0) 60%),radial-gradient(1px 1px at 52% 50%,rgba(255,236,208,0.4),rgba(255,236,208,0) 60%),radial-gradient(1.2px 1.2px at 4% 86%,rgba(255,236,208,0.55),rgba(255,236,208,0) 60%),radial-gradient(1px 1px at 33% 44%,rgba(255,236,208,0.4),rgba(255,236,208,0) 60%)}
+.sky-story .st-h{color:#FFE6CC}
+.sky-story .st-body p{color:#F0DCC4}
+.sky-story .st-body p.lead,.sky-story .st-body p.sign{color:#FFE6CC}
+/* photo collage: three white-framed prints, tilted and overlapping, like prints dropped on a table */
+.sky-story .st-grid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(32px,5vw,80px);row-gap:clamp(22px,2.6vw,34px)}
+.sky-story .st-collage{grid-column:1;grid-row:1 / span 2;align-self:center}
+.sky-story .st-head{grid-column:2;grid-row:1}
+.sky-story .st-body{grid-column:2;grid-row:2}
+.st-collage{position:relative;width:100%;max-width:540px;aspect-ratio:100/106}
+.st-collage .pr{position:absolute;margin:0;padding:2.8%;box-sizing:border-box;background:#fff;border-radius:2px;box-shadow:0 18px 38px rgba(0,0,0,0.45),0 2px 7px rgba(0,0,0,0.3);transform:rotate(var(--r,0deg));transition:transform .9s cubic-bezier(.22,.9,.24,1) var(--d,0ms),opacity .7s ease var(--d,0ms)}
+.st-collage .pr img{display:block;width:100%;height:auto;aspect-ratio:var(--ar,3/2);object-fit:cover;object-position:var(--op,50% 50%)}
+.st-collage .pr-a{left:37%;top:1%;width:61%;--r:4deg;--ar:3/2;--d:0ms;z-index:1}
+.st-collage .pr-b{left:0;top:27%;width:50%;--r:-4deg;--ar:720/658;--d:140ms;z-index:2}
+.st-collage .pr-c{left:49%;top:42%;width:42%;--r:-11deg;--ar:3/4;--d:280ms;z-index:3}
+html.js .st-collage:not(.in) .pr{opacity:0;transform:translateY(20px) rotate(calc(var(--r) + 7deg))}
+@media (hover:hover){.st-collage .pr:hover{z-index:5;transform:rotate(var(--r)) scale(1.035);transition:transform .35s ease 0ms}}
+@media (prefers-reduced-motion:reduce){.st-collage .pr{transition:none}html.js .st-collage:not(.in) .pr{opacity:1;transform:rotate(var(--r))}}
+@media (max-width:820px){.sky-story .st-grid{grid-template-columns:minmax(0,1fr);row-gap:26px}.sky-story .st-collage,.sky-story .st-head,.sky-story .st-body{grid-column:auto;grid-row:auto}.st-collage{margin-inline:auto}}
+.sky-faq{background:linear-gradient(180deg,#FEDF78 0%,rgba(254,223,120,0) 200px),linear-gradient(180deg,rgba(211,230,247,0) calc(100% - 260px),#D3E6F7 100%),url(/_blob/63d0120fbecf96f154a1253a07e62d16) 50% 50%/cover no-repeat #F6EFD8}
+.st-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
+.st-head{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.st-h{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.4vw,58px);font-weight:600;line-height:1.08;letter-spacing:-0.01em;color:#131846;text-wrap:balance}
+.st-sub{margin:0;max-width:420px;font-size:clamp(16px,1.4vw,18px);line-height:1.6;color:#2A3466;text-wrap:pretty}
+.st-sub a{color:#131846;text-decoration:underline;text-underline-offset:4px}
+.st-body p{margin:0 0 18px;max-width:600px;font-size:clamp(17px,1.5vw,19.5px);line-height:1.7;color:#1E2352;text-wrap:pretty}
+.st-body p.lead{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.5vw,34px);line-height:1.25;font-weight:600;color:#131846}
+.st-body p.sign{margin:26px 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(24px,2.2vw,30px);line-height:1.2;color:#131846}
+.faq-list{display:flex;flex-direction:column;border-top:1px solid rgba(19,24,70,0.2)}
+.faq-item{border-bottom:1px solid rgba(19,24,70,0.2)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:68px;padding:14px 0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,2.2vw,28px);font-weight:600;line-height:1.2;color:#131846}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"";flex:none;width:11px;height:11px;margin:0 6px 4px 0;border-right:2px solid #131846;border-bottom:2px solid #131846;transform:rotate(45deg);transition:transform .25s ease,margin .25s ease}
+.faq-item[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px}
+.faq-item summary:focus-visible{outline:3px solid #131846;outline-offset:4px;border-radius:8px}
+.faq-item p{margin:0 0 22px;max-width:620px;font-size:clamp(16px,1.4vw,18px);line-height:1.65;color:#2A3466;text-wrap:pretty}
+@media (max-width:820px){.st-grid{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.faq-item summary::after{transition:none}}
+/* ---- Mobile: smaller type, tighter spacing ---- */
+@media (max-width:600px){
+  #top{padding:84px 16px 48px !important}
+  .hero-name{font-size:54px}
+  .hero-tag{font-size:21px}
+  #how,#why,#join,#problem,#story,#faq{padding-top:48px !important;padding-bottom:48px !important}
+  #try{padding-top:16px !important;padding-bottom:48px !important}
+  #why > div{gap:32px !important}
+  #how h2,#try h2,#join h2,#stats-title{font-size:28px !important;line-height:1.12 !important}
+  #join h3{font-size:26px !important}
+  .why-title{font-size:54px}
+  .hiw-ttl{font-size:23px}
+  .hiw-ico{width:38px;height:38px;border-radius:12px}
+  .hiw-head{gap:12px}
+  .hiw-item{padding-left:20px}
+  .hiw-more{margin-left:0}
+  .hiw-li{font-size:15px}
+  .cta{padding:14px 20px !important;font-size:14.5px !important;gap:8px !important}
+  #join .lit{padding:22px 14px !important;gap:20px !important}
+  .navy-btn{min-height:50px !important}
+  #feedback textarea{min-height:120px !important}
+  .pf-dot{width:36px;height:36px}
+}
+/* ---- Header: Feedback and Expertise ---- */
+.head-btns{display:flex;align-items:center;gap:8px;flex:none}
+.nav-cta.nav-alt,.nav-cta.nav-alt[data-solid="1"]{background:transparent;border-color:rgba(240,162,98,0.75);color:#F7C08E}
+.nav-cta.nav-alt:hover{background:rgba(240,162,98,0.18);border-color:#F0A262;color:#FFE6CC}
+.site-head[data-tone="light"] .nav-cta.nav-alt{background:transparent;border-color:#131846;color:#131846}
+.site-head[data-tone="light"] .nav-cta.nav-alt:hover{background:rgba(19,24,70,0.08);border-color:#131846;color:#131846}
+/* ---- Each section measures its own width, so the small-screen sizes also hold inside the mobile preview ---- */
+.cq{container-type:inline-size}
+/* ---- Features: a simple grid of what In Good Hands does ---- */
+.ft2-h{margin:0;max-width:760px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.6vw,52px);font-weight:600;line-height:1.1;color:#FFE6CC;text-shadow:0 1px 18px rgba(8,12,40,0.8);text-wrap:balance}
+.ft2-grid{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.ft2-cell{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:230px;padding:clamp(28px,3vw,44px) clamp(16px,2vw,28px);text-align:center;border:0 solid rgba(240,200,160,0.24)}
+.ft2-cell:not(:nth-child(4n+1)){border-left-width:1px}
+.ft2-cell:nth-child(n+5){border-top-width:1px}
+.ft2-t{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(25px,2.3vw,31px);font-weight:600;line-height:1.15;color:#FFE6CC;text-shadow:0 1px 14px rgba(8,12,40,0.85);text-wrap:balance}
+.ft2-d{margin:0;max-width:250px;font-size:clamp(15px,1.3vw,16.5px);line-height:1.55;color:#F0CDAA;text-shadow:0 1px 12px rgba(8,12,40,0.85);text-wrap:pretty}
+.ft2-go{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:#F0A262;box-shadow:0 0 36px rgba(240,162,98,0.45);transition:transform .2s ease,background .2s ease}
+.ft2-go:hover{background:#F8B67C;transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.ft2-go{transition:none}}
+/* ---- Why In Good Hands: four reasons in two rows ---- */
+.wy-cols4{grid-template-columns:repeat(2,minmax(0,1fr));padding:clamp(10px,1.4vw,20px) 0}
+.wy-cols4 .wy-col{padding-top:clamp(18px,2.2vw,28px);padding-bottom:clamp(18px,2.2vw,28px)}
+.wy-cols4 .wy-col+.wy-col{border-left:0}
+.wy-cols4 .wy-col:nth-child(2n){border-left:1px solid rgba(19,24,70,0.14)}
+.wy-cols4 .wy-col:nth-child(n+3){border-top:1px solid rgba(19,24,70,0.14)}
+/* ---- Early access: the who-are-you dropdown ---- */
+.sel-wrap{position:relative}
+.who-sel{-webkit-appearance:none;appearance:none;display:block;width:100%;box-sizing:border-box;min-height:58px;padding:0 54px 0 20px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.55);background:#FFF8EA;color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);font-weight:600;cursor:pointer}
+.sel-wrap svg{position:absolute;right:20px;top:50%;transform:translateY(-50%);pointer-events:none}
+.lit select:focus-visible{outline:3px solid #131846;outline-offset:3px}
+/* ---- Narrower screens ---- */
+@container (max-width:960px){
+  .ft2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ft2-cell:not(:nth-child(4n+1)){border-left-width:0}
+  .ft2-cell:nth-child(2n){border-left-width:1px}
+  .ft2-cell:nth-child(n+3){border-top-width:1px}
+}
+@container (max-width:520px){
+  .ft2-grid{grid-template-columns:minmax(0,1fr)}
+  .ft2-cell:nth-child(2n){border-left-width:0}
+  .ft2-cell:nth-child(n+2){border-top-width:1px}
+}
+@container (max-width:1100px){
+  .wy-panel{grid-template-columns:minmax(0,1fr)}
+  .wy-pic{min-height:200px}
+}
+@container (max-width:820px){
+  .st-grid{grid-template-columns:minmax(0,1fr)}
+  .sky-story .st-grid{grid-template-columns:minmax(0,1fr);row-gap:26px}
+  .sky-story .st-collage,.sky-story .st-head,.sky-story .st-body{grid-column:auto;grid-row:auto}
+  .st-collage{margin-inline:auto}
+  .ft-grid{grid-template-columns:minmax(0,1fr)}
+}
+@container (max-width:700px){
+  .wy-switch{width:100%}
+  .wy-sw{flex:1 1 0;padding:0 12px}
+  .wy-cols{grid-template-columns:minmax(0,1fr);padding:6px 0 14px}
+  .wy-col{padding:18px 20px}
+  .wy-col+.wy-col{border-left:0;border-top:1px solid rgba(19,24,70,0.14)}
+  .wy-cols4 .wy-col:nth-child(2n){border-left:0}
+  .wy-cols4 .wy-col+.wy-col{border-top:1px solid rgba(19,24,70,0.14)}
+  .wy-cols4 .wy-col{padding:18px 20px}
+}
+@container (max-width:600px){
+  .hero-name{font-size:48px}
+  .hero-tag{font-size:20px}
+  .hero-sub{font-size:15px}
+  .hero-cta{min-height:48px;padding:0 24px;font-size:15px}
+  .hero-link{font-size:15px}
+  .eyebrow{font-size:12px;letter-spacing:0.12em}
+  #stats-title,#join h2{font-size:28px !important;line-height:1.12 !important}
+  .ft2-h,.st-h{font-size:28px;line-height:1.12}
+  .pf-cell{gap:10px;padding:16px 14px;border-radius:18px}
+  .pf-ico{width:40px;height:40px}
+  .pf-find{font-size:19px}
+  .pf-quote{font-size:16px}
+  .pf-num{font-size:36px}
+  .pf-cap{font-size:14px;line-height:1.4}
+  .pf-step,.pf-who,.pf-note{font-size:12.5px}
+  .pf-duo{gap:10px}
+  .pf-duo>.pf-stat+.pf-stat{padding-left:10px}
+  .cr-btn{width:44px;height:44px}
+  .st-body p{font-size:15.5px;line-height:1.6;margin-bottom:14px}
+  .st-body p.lead{font-size:23px}
+  .st-body p.sign{font-size:21px}
+  .ft2-cell{min-height:0;padding:22px 12px;gap:8px}
+  .ft2-t{font-size:21px}
+  .ft2-d{font-size:14px}
+  .ft2-go{width:52px;height:52px}
+  .why-title{font-size:48px}
+  .wy-name{font-size:38px}
+  .wy-ti{font-size:21px}
+  .wy-tx{font-size:15px}
+  .wy-sw{min-height:44px;font-size:14.5px}
+  .faq-item summary{min-height:56px;font-size:19px}
+  .faq-item p{font-size:15px}
+  .st-sub{font-size:15px}
+  .lit{padding:22px 14px !important;gap:20px !important}
+  .who-sel,#contact-bottom{min-height:52px !important;font-size:16px !important}
+  .navy-btn{min-height:50px !important;font-size:16px !important}
+  .ft-h{font-size:26px}
+  .ft-blurb{font-size:18px}
+  .ft-note,.ft-li,.ft-sub{font-size:15px}
+  #feedback textarea{min-height:120px !important;font-size:16px !important}
+}
+</style>
+</helmet>
+
+<div style="width:100%;min-height:100vh;box-sizing:border-box;background:#05070F;color:#FFE6CC;font-family:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+
+<!-- ============ HEADER: sticky, sits over the sky ============ -->
+<div style="position:sticky;top:0;z-index:60;margin-bottom:-72px;">
+<div style="container-type:inline-size;container-name:site;">
+<header class="site-head">
+  <a href="#top" class="site-logo" aria-label="In Good Hands, back to top" style="display:flex;align-items:center;text-decoration:none;"><img src="/_blob/71e427f68a463d7c8749cb4c8dfe689f" alt="In Good Hands" style="display:block;height:56px;width:auto;"></a>
+  <nav class="site-nav" aria-label="Page sections">
+    <a class="nav-tab" href="#problem">The Problem</a>
+    <a class="nav-tab" href="#story">Why I'm Building This</a>
+    <a class="nav-tab" href="#how">Features</a>
+    <a class="nav-tab" href="#try">Try It Yourself</a>
+    <a class="nav-tab" href="#why">Rationales</a>
+    <a class="nav-tab" href="#faq">FAQ</a>
+    <a class="nav-tab" href="#contact">Contact Us</a>
+  </nav>
+  <div class="head-btns">
+    <a href="#contact" class="nav-cta nav-alt">Feedback</a>
+    <a href="#join" class="nav-cta">Expertise</a>
+  </div>
+</header>
+</div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="sky cq" style="position:relative;overflow:hidden;box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-height:clamp(520px,42vw,640px);padding:clamp(112px,12vw,150px) clamp(20px,4.5vw,64px) clamp(72px,8vw,112px);">
+
+  <!-- warm light spilling from the screen onto the sky -->
+  <div aria-hidden="true" class="glow" style="position:absolute;left:50%;top:clamp(40px,6vw,90px);width:min(1600px,160%);height:1000px;transform:translateX(-50%);background:radial-gradient(ellipse 50% 50% at 50% 26%,rgba(240,150,80,0.20) 0%,rgba(224,130,70,0.07) 45%,rgba(224,130,70,0) 72%);pointer-events:none;"></div>
+  <!-- sky fades to night at the bottom so the page flows into the next section -->
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:280px;background:linear-gradient(180deg,rgba(5,7,15,0) 0%,#05070F 100%);pointer-events:none;"></div>
+
+  <div style="position:relative;width:100%;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;align-items:center;">
+    <h1 class="hero-h1">
+      <span class="hero-name" data-reveal>In Good Hands</span>
+      <span class="hero-tag" data-reveal style="--d:260ms;">Clarity &amp; Assurance for the Bereaved</span>
+    </h1>
+    <p class="hero-sub" data-reveal style="--d:340ms;">A website helping families in Singapore before, during and after a loss — with a real person to step in whenever you'd like.</p>
+    <div class="hero-actions" data-reveal style="--d:460ms;">
+      <a href="#try" class="hero-cta">Try it yourself</a>
+      <a href="#how" class="hero-link">See the features</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE PROBLEM: interview findings matched with survey figures, toggled left and right ============ -->
+<section id="problem" class="anchor sky-problem cq" aria-labelledby="stats-title" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(72px,9vw,128px) clamp(20px,4.5vw,64px) clamp(64px,8vw,104px);">
+
+  <!-- faint flowing lines, like contour lines on the night sky -->
+  <svg aria-hidden="true" viewBox="0 0 1440 1400" preserveAspectRatio="none" fill="none" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;">
+    <path d="M-40 320 C 320 160, 560 640, 920 480 S 1380 220, 1500 560" stroke="rgba(240,162,98,0.14)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+    <path d="M-40 1060 C 280 900, 600 1380, 960 1200 S 1400 980, 1500 1300" stroke="rgba(240,162,98,0.12)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+  </svg>
+
+  <div style="position:relative;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(28px,4vw,48px);">
+
+    <div data-reveal style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;">
+      <span class="eyebrow ctr">The Problem: Three Main Struggles</span>
+      <h2 id="stats-title" style="margin:0;max-width:800px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.6vw,52px);font-weight:600;line-height:1.1;color:#FFE6CC;text-wrap:balance;">An Overwhelming Struggle</h2>
+    </div>
+
+    <div class="pf" data-reveal style="--d:100ms;display:flex;flex-direction:column;gap:16px;container-type:inline-size;container-name:pf;">
+
+      <!-- column headings; on narrow screens each card carries its own label instead -->
+      <div class="pf-head">
+        <div style="display:flex;flex-direction:column;gap:6px;text-align:center;">
+          <h3 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3vw,34px);font-weight:600;line-height:1.15;color:#FFE6CC;">What We Heard</h3>
+          <p style="margin:0;font-size:15.5px;line-height:1.5;color:#E3B891;">Interviews with 10 bereaved persons and 4 funeral providers</p>
+        </div>
+        <div aria-hidden="true"></div>
+        <div style="display:flex;flex-direction:column;gap:6px;text-align:center;">
+          <h3 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3vw,34px);font-weight:600;line-height:1.15;color:#FFE6CC;">What the Research Shows</h3>
+          <p style="margin:0;font-size:15.5px;line-height:1.5;color:#E3B891;">Studies from Singapore and overseas</p>
+        </div>
+      </div>
+
+      <div class="cr" role="group" aria-roledescription="carousel" aria-label="Three struggles families face, with what we heard and what the research shows">
+        <div class="cr-view">
+          <div class="cr-track" style="{{pfTrack}}">
+
+            <!-- pair 1: decisions within hours / not enough time -->
+            <div class="cr-slide" role="group" aria-roledescription="slide" aria-label="1 of 4" aria-hidden="{{pfHide0}}">
+              <div class="pf-row">
+                <div class="pf-cell l">
+                  <span class="hiw-tag pf-tag">What We Heard</span>
+                  <span class="pf-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+                  <span class="pf-step">01 · Decisions</span>
+                  <p class="pf-find">Costly choices, made within hours</p>
+                  <p class="pf-quote">“…rapid decisions … when they are least equipped to process it.”</p>
+                  <p class="pf-who">— Funeral service provider</p>
+                </div>
+                <div class="pf-link" aria-hidden="true"><span class="pf-dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"></path></svg></span></div>
+                <div class="pf-cell r">
+                  <span class="hiw-tag pf-tag">What the Research Shows</span>
+                  <div class="pf-duo">
+                    <div class="pf-stat">
+                      <p class="pf-num">61%</p>
+                      <p class="pf-cap">don't feel equipped to arrange a funeral</p>
+                      <div class="pf-bar" aria-hidden="true"><i style="width:61%;"></i></div>
+                    </div>
+                    <div class="pf-stat">
+                      <p class="pf-num">62%</p>
+                      <p class="pf-cap">didn't compare providers, mostly for lack of time</p>
+                      <div class="pf-bar" aria-hidden="true"><i style="width:62%;"></i></div>
+                    </div>
+                  </div>
+                  <p class="pf-note">CCCS (2023)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- pair 2: total unfamiliarity / not equipped -->
+            <div class="cr-slide" role="group" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="{{pfHide1}}">
+              <div class="pf-row">
+                <div class="pf-cell l">
+                  <span class="hiw-tag pf-tag">What We Heard</span>
+                  <span class="pf-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7Z"></path><path d="M14 3.5v4h4"></path><path d="M9.5 12h6M9.5 15.5h6"></path></svg></span>
+                  <span class="pf-step">02 · Paperwork</span>
+                  <p class="pf-find">Paperwork that drags on for years</p>
+                  <p class="pf-quote">“Still dealing with the aftermath of the funeral (2 years later).”</p>
+                  <p class="pf-who">— Bereaved interviewee</p>
+                </div>
+                <div class="pf-link" aria-hidden="true"><span class="pf-dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"></path></svg></span></div>
+                <div class="pf-cell r">
+                  <span class="hiw-tag pf-tag">What the Research Shows</span>
+                  <div class="pf-duo">
+                    <div class="pf-stat">
+                      <p class="pf-num">~20</p>
+                      <p class="pf-cap">months to settle a loved one's affairs (US)</p>
+                    </div>
+                    <div class="pf-stat">
+                      <p class="pf-num">66.5%</p>
+                      <p class="pf-cap">in Singapore have a low grasp of death-planning documents</p>
+                      <div class="pf-bar" aria-hidden="true"><i style="width:66.5%;"></i></div>
+                    </div>
+                  </div>
+                  <p class="pf-note">Empathy (2025); Singapore Hospice Council</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- pair 3: lost on choosing a provider / 300+ providers, 62% didn't compare -->
+            <div class="cr-slide" role="group" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="{{pfHide2}}">
+              <div class="pf-row">
+                <div class="pf-cell l">
+                  <span class="hiw-tag pf-tag">What We Heard</span>
+                  <span class="pf-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"></path></svg></span>
+                  <span class="pf-step">03 · Grief</span>
+                  <p class="pf-find">Grief has no timeline</p>
+                  <p class="pf-quote">“You don't really process things during the funeral … but the next day you have to go to work.”</p>
+                  <p class="pf-who">— Bereaved interviewee</p>
+                </div>
+                <div class="pf-link" aria-hidden="true"><span class="pf-dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"></path></svg></span></div>
+                <div class="pf-cell r">
+                  <span class="hiw-tag pf-tag">What the Research Shows</span>
+                  <div class="pf-duo">
+                    <div class="pf-stat">
+                      <p class="pf-num">74%</p>
+                      <p class="pf-cap">said their work suffered after a loss (US)</p>
+                      <div class="pf-bar" aria-hidden="true"><i style="width:74%;"></i></div>
+                    </div>
+                    <div class="pf-stat">
+                      <p class="pf-num">0</p>
+                      <p class="pf-cap">days of compassionate leave required by law here</p>
+                    </div>
+                  </div>
+                  <p class="pf-note">Empathy (2025); Singapore Employment Act</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- pair 4: family disputes / decisions left to family -->
+            <div class="cr-slide" role="group" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="{{pfHide3}}">
+              <div class="pf-row">
+                <div class="pf-cell l">
+                  <span class="hiw-tag pf-tag">What We Heard</span>
+                  <span class="pf-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5h16"></path><path d="M5.5 15.5l4-4 3 3 6-7"></path><path d="M15 7.5h3.5V11"></path></svg></span>
+                  <span class="pf-step">And it's growing</span>
+                  <p class="pf-find">A death every 20 minutes in Singapore</p>
+                  <p class="pf-quote">Each leaves about six people grieving.</p>
+                </div>
+                <div class="pf-link" aria-hidden="true"><span class="pf-dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0A262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"></path></svg></span></div>
+                <div class="pf-cell r">
+                  <span class="hiw-tag pf-tag">What the Research Shows</span>
+                  <div class="pf-duo">
+                    <div class="pf-stat">
+                      <p class="pf-num">~70%</p>
+                      <p class="pf-cap">more deaths a year than in 2000</p>
+                      <div class="pf-bar" aria-hidden="true"><i style="width:70%;"></i></div>
+                    </div>
+                    <div class="pf-stat">
+                      <p class="pf-num">120k+</p>
+                      <p class="pf-cap">people newly grieving each year</p>
+                    </div>
+                  </div>
+                  <p class="pf-note">SingStat; NTU, via CNA</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="cr-ctrl">
+          <button type="button" class="cr-btn" aria-label="Previous finding" onClick="{{pfPrev}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="#F0A262" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+          <div class="cr-dots">
+            <button type="button" class="cr-d" aria-label="Go to finding 1" aria-current="{{pfCur0}}" onClick="{{pfGo0}}"><i></i></button>
+            <button type="button" class="cr-d" aria-label="Go to finding 2" aria-current="{{pfCur1}}" onClick="{{pfGo1}}"><i></i></button>
+            <button type="button" class="cr-d" aria-label="Go to finding 3" aria-current="{{pfCur2}}" onClick="{{pfGo2}}"><i></i></button>
+            <button type="button" class="cr-d" aria-label="Go to finding 4" aria-current="{{pfCur3}}" onClick="{{pfGo3}}"><i></i></button>
+          </div>
+          <button type="button" class="cr-btn" aria-label="Next finding" onClick="{{pfNext}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="#F0A262" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+        </div>
+      </div>
+
+    </div>
+
+    <p data-reveal style="--d:100ms;margin:0;text-align:center;font-size:14.5px;line-height:1.6;color:#C9A98A;text-wrap:pretty;">Sources: CCCS, <i>Market study report: Funeral services industry in Singapore</i> (2023); Empathy, <i>The Grief Tax</i> (2025); Singapore Hospice Council; Department of Statistics Singapore; CNA. Quotes from my interviews with 10 bereaved persons and 4 funeral providers (2026). <a href="https://www.ccs.gov.sg/case-register/public-register/market-studies/funeral-services-industry-in-singapore/" target="_blank" rel="noopener" style="display:inline-block;padding:11px 2px;color:#F7C08E;text-decoration:underline;text-underline-offset:3px;">Read the report</a></p>
+  </div>
+</section>
+
+<!-- ============ WHY I BUILT THIS: the founder's story, a night section after the problem ============ -->
+<section id="story" class="anchor sky-story cq" aria-labelledby="story-title" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(72px,9vw,120px) clamp(20px,4.5vw,64px) clamp(56px,7vw,96px);">
+  <div style="position:relative;max-width:1120px;margin:0 auto;">
+    <div class="st-grid">
+      <div class="st-head" data-reveal>
+        <span class="eyebrow">My story</span>
+        <h2 id="story-title" class="st-h">Why I'm Building This</h2>
+      </div>
+        <div class="st-collage" role="group" aria-label="Photos of my family" data-reveal style="--d:120ms;">
+          <figure class="pr pr-a"><img src="/_blob/a9d04665859611dcf5381c5c1f15ed68" width="960" height="540" loading="lazy" alt="Two people sitting side by side at a food-court table, smiling"></figure>
+          <figure class="pr pr-b"><img src="/_blob/b5dd5b523061c90245edeb163eedf9da" width="720" height="658" loading="lazy" alt="A family of six smiling together at a restaurant, one of them waving at the camera"></figure>
+          <figure class="pr pr-c"><img src="/_blob/d19ed05161df879e89bd02745a8538a5" width="900" height="1200" loading="lazy" alt="Family standing together beside a framed portrait and white flowers at a funeral wake"></figure>
+        </div>
+      <div class="st-body">
+        <p class="lead" data-reveal>At 19, I lost my father suddenly to a heart attack.</p>
+        <p data-reveal><strong>Before the funeral,</strong> I ended up in charge, with no idea what to do. The hospital handed me a list of 22 funeral directors: only names, websites and phone numbers. In my confusion I picked one at random. Only years later did I find out we had paid almost double the market price.</p>
+        <p data-reveal><strong>After the funeral,</strong> the paperwork began: closing his bank and insurance accounts one by one, while my family was still crumbling in grief.</p>
+        <p data-reveal><strong>Then grief hit me.</strong> Brain fog made daily life a struggle, and it took me two years and 33 counselling sessions to find my footing again.</p>
+        <p data-reveal>My experience isn't unique. That's why I'm building In Good Hands: so the next family has help at every step, and no one has to carry it alone.</p>
+        <p class="sign" data-reveal>— Felicia, founder</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES: what In Good Hands does, in a simple grid ============ -->
+<section id="how" class="anchor sky-night-a cq" aria-labelledby="features-title" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(72px,9vw,128px) clamp(20px,4.5vw,64px) clamp(72px,8vw,112px);">
+  <div style="position:relative;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(36px,5vw,64px);">
+    <div data-reveal style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;">
+      <span class="eyebrow ctr">Features</span>
+      <h2 id="features-title" class="ft2-h">Everything your family needs, in one place</h2>
+    </div>
+    <div class="ft2-grid" data-reveal style="--d:100ms;">
+      <div class="ft2-cell"><h3 class="ft2-t">AI Guide</h3><p class="ft2-d">Explains what to do after a death, in plain words, at any hour.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Provider Matching</h3><p class="ft2-d">Finds funeral providers that suit your beliefs and budget, in minutes.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Shared Checklist</h3><p class="ft2-d">Split the to-dos across your family, so no one carries it alone.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Account Closure</h3><p class="ft2-d">Track every account to close, from banks to insurance, in one place.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Private Journal</h3><p class="ft2-d">Check in on your mood and write freely. Only you can read it.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Real People</h3><p class="ft2-d">Our care team, partner counsellors and lawyers, a call away.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Free to Start</h3><p class="ft2-d">Matching, checklists and the journal cost nothing to use.</p></div>
+      <div class="ft2-cell"><h3 class="ft2-t">Try It Yourself</h3><a href="#try" class="ft2-go" aria-label="Try the live preview"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="#131846" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- the earlier step-by-step tour, kept hidden in case it is wanted again -->
+<section hidden aria-hidden="true" style="display:none;">
+  <div>
+
+    <div class="hiw-top">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:14px;">
+        <span class="eyebrow">How it works</span>
+        <h2 id="how-title" style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.6vw,52px);font-weight:600;line-height:1.1;color:#FFE6CC;text-shadow:0 1px 18px rgba(8,12,40,0.8);text-wrap:balance;">Our Solution</h2>
+      </div>
+      <p style="margin:0;max-width:560px;font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#F0C9A4;text-shadow:0 1px 16px rgba(8,12,40,0.8);text-wrap:pretty;">In Good Hands uses an AI chatbot to help families understand Singapore's complicated bereavement process, while also having a human option to help families navigate funeral rites.</p>
+    </div>
+
+    <div class="hiw-acc">
+      <div class="hiw-left" data-reveal style="--d:100ms;">
+      <ol class="hiw-steps">
+        <li class="hiw-item" style="{{hiwItem1}}">
+          <span class="hiw-rail" aria-hidden="true"><i style="{{hiwBar1}}"></i></span>
+          <button type="button" class="hiw-head" id="hiw-head-1" aria-expanded="{{hiwExp1}}" aria-controls="hiw-panel-1" onClick="{{hiwOpen1}}">
+            <span class="hiw-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path class="ico-l" d="M4 7h16"></path><path class="ico-l" style="animation-delay:220ms" d="M4 12h11"></path><path class="ico-l" style="animation-delay:440ms" d="M4 17h14"></path></svg></span>
+            <span class="hiw-txt">
+              <span class="hiw-no">01</span>
+              <span class="hiw-ttl">Questionnaire (Needs Assessment)</span>
+              <span class="hiw-sum">A few gentle questions help us better understand your situation and needs.</span>
+            </span>
+          </button>
+          <div class="hiw-more" id="hiw-panel-1" role="region" aria-labelledby="hiw-head-1" style="{{hiwPanel1}}">
+            <div class="hiw-more-in">
+              <p class="hiw-lead">It covers:</p>
+              <div style="display:flex;flex-wrap:wrap;gap:9px;max-width:540px;">
+                <span class="hiw-tag">Cause of death</span>
+                <span class="hiw-tag">Beliefs (religion)</span>
+                <span class="hiw-tag">Rituals</span>
+                <span class="hiw-tag">Budget ceiling</span>
+                <span class="hiw-tag">Preferred provider (if any)</span>
+                <span class="hiw-tag">Family dynamics</span>
+                <span class="hiw-tag">Logistical constraints</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="hiw-item" style="{{hiwItem2}}">
+          <span class="hiw-rail" aria-hidden="true"><i style="{{hiwBar2}}"></i></span>
+          <button type="button" class="hiw-head" id="hiw-head-2" aria-expanded="{{hiwExp2}}" aria-controls="hiw-panel-2" onClick="{{hiwOpen2}}">
+            <span class="hiw-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="ico-s" d="M11 4l1.9 5.1L18 11l-5.1 1.9L11 18l-1.9-5.1L4 11l5.1-1.9Z"></path><path d="M19 3.5v3M17.5 5h3"></path></svg></span>
+            <span class="hiw-txt">
+              <span class="hiw-no">02</span>
+              <span class="hiw-ttl">Preliminary Recommendation</span>
+              <span class="hiw-sum">Options matched to your family, with the reasons behind each.</span>
+            </span>
+          </button>
+          <div class="hiw-more" id="hiw-panel-2" role="region" aria-labelledby="hiw-head-2" style="{{hiwPanel2}}">
+            <div class="hiw-more-in">
+              <p class="hiw-lead">2–3 tailored options, each shown with:</p>
+              <div style="display:flex;flex-direction:column;gap:10px;max-width:520px;">
+                <p class="hiw-li"><i></i><span>A clear rationale for why it fits you</span></p>
+                <p class="hiw-li"><i></i><span>Prices</span></p>
+                <p class="hiw-li"><i></i><span>What's included</span></p>
+                <p class="hiw-li"><i></i><span>Caveats to watch for</span></p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="hiw-item" style="{{hiwItem3}}">
+          <span class="hiw-rail" aria-hidden="true"><i style="{{hiwBar3}}"></i></span>
+          <button type="button" class="hiw-head" id="hiw-head-3" aria-expanded="{{hiwExp3}}" aria-controls="hiw-panel-3" onClick="{{hiwOpen3}}">
+            <span class="hiw-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path class="ico-t" d="M7.8 12.4l3 3 5.4-6.4"></path></svg></span>
+            <span class="hiw-txt">
+              <span class="hiw-no">03</span>
+              <span class="hiw-ttl">Next Steps (To-Dos) &amp; FAQ</span>
+              <span class="hiw-sum">The right next step at the right moment, according to your needs and existing regulations.</span>
+            </span>
+          </button>
+          <div class="hiw-more" id="hiw-panel-3" role="region" aria-labelledby="hiw-head-3" style="{{hiwPanel3}}">
+            <div class="hiw-more-in">
+              <div style="display:flex;flex-direction:column;gap:10px;max-width:520px;">
+                <p class="hiw-li"><i></i><span>See your <strong>% to administrative completion</strong> at a glance.</span></p>
+                <p class="hiw-li"><i></i><span><strong>Ask the AI about funerals</strong> and get quick, precise answers, for example:</span></p>
+                <p style="margin:0 0 0 19px;font-size:clamp(15px,1.5vw,17px);line-height:1.7;font-style:italic;color:#F0C9A4;">“What to ask any funeral provider,” “Red flags in funeral contracts,” “How to plan a low-cost but dignified funeral.”</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="hiw-item" style="{{hiwItem4}}">
+          <span class="hiw-rail" aria-hidden="true"><i style="{{hiwBar4}}"></i></span>
+          <button type="button" class="hiw-head" id="hiw-head-4" aria-expanded="{{hiwExp4}}" aria-controls="hiw-panel-4" onClick="{{hiwOpen4}}">
+            <span class="hiw-ico" aria-hidden="true"><svg width="28" height="24" viewBox="0 0 30 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="ico-hl" d="M4,10 Q3,20 13,22 Q16,22 15,18 Q14,14 9,12 Q5,10 4,5"></path><path class="ico-hr" d="M26,10 Q27,20 17,22 Q14,22 15,18 Q16,14 21,12 Q25,10 26,5"></path></svg></span>
+            <span class="hiw-txt">
+              <span class="hiw-no">04</span>
+              <span class="hiw-ttl">Human Assistance</span>
+              <span class="hiw-sum">When you'd like a person beside you, our concierges step in.</span>
+            </span>
+          </button>
+          <div class="hiw-more" id="hiw-panel-4" role="region" aria-labelledby="hiw-head-4" style="{{hiwPanel4}}">
+            <div class="hiw-more-in">
+              <div style="display:flex;flex-direction:column;gap:10px;max-width:540px;">
+                <p class="hiw-li"><i></i><span>Prefer to talk it through? <strong>Call us to consult by phone</strong> on +65 XXXX XXXX.</span></p>
+                <p class="hiw-li"><i></i><span><strong>Contract &amp; fine-print review</strong></span></p>
+                <p class="hiw-li"><i></i><span><strong>Negotiates transparent, pre-agreed rates</strong> with funeral service providers on your family's behalf, as the neutral middle-man.</span></p>
+                <p class="hiw-li"><i></i><span>Helps you make sense of what's included and excluded in a package: refund policies, upgrade costs, overtime charges, transport fees, permit fees and more.</span></p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+        <button type="button" class="hiw-pause" onClick="{{hiwToggle}}" aria-pressed="{{hiwPausedAttr}}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{hiwToggleIcon}}"></path></svg>
+          <span>{{hiwToggleLabel}}</span>
+        </button>
+      </div>
+
+      <div class="hiw-demo" data-reveal style="--d:200ms;" aria-hidden="true">
+        <div class="hiw-stage">
+        <div class="hiw-slide" style="{{hiwSlide1}}">
+          <div class="hiw-phone" aria-hidden="true">
+              <div class="mk-bar">
+                <span class="mk-brand"><img src="/_blob/40af16fc804e95b14913b9f18ed00442" alt="" aria-hidden="true" style="display:block;height:20px;width:auto;">In Good Hands</span>
+                <span class="mk-pill"><span class="mk-dot"></span>Guide (AI)</span>
+              </div>
+              <div class="mk">
+                <div class="mk-prog"><b>5 steps to completion</b><div class="mk-track"><i style="width:58%;"></i></div></div>
+                <div class="mk-ai">Does your family follow a particular tradition? It shapes the rites, the timing and which providers suit you.</div>
+                <div class="mk-me">Taoist</div>
+                <div class="mk-ai">Thank you. I'll look for providers experienced with Taoist rites.</div>
+                <div class="mk-ai">Do you have a rough ceiling in mind for the total? It's fine to say you're not sure.</div>
+                <div class="mk-chips">
+                  <span class="mk-chip">Under S$2,000</span>
+                  <span class="mk-chip on">S$2,000 to S$6,000</span>
+                  <span class="mk-chip">S$6,000 to S$10,000</span>
+                  <span class="mk-chip">Not sure yet</span>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="hiw-slide" style="{{hiwSlide2}}">
+          <div class="hiw-phone" aria-hidden="true">
+              <div class="mk-bar">
+                <span class="mk-brand"><img src="/_blob/40af16fc804e95b14913b9f18ed00442" alt="" aria-hidden="true" style="display:block;height:20px;width:auto;">In Good Hands</span>
+                <span class="mk-pill"><span class="mk-dot"></span>Guide (AI)</span>
+              </div>
+              <div class="mk">
+                <div class="mk-card rec">
+                  <span class="mk-rib">Recommended for you</span>
+                  <div class="mk-name">Standard funeral</div>
+                  <div class="mk-price">From S$5,520</div>
+                  <div class="mk-sub">Why this fits you</div>
+                  <div class="mk-tick"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="#BFE3C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>You chose a funeral service with a wake.</span></div>
+                  <div class="mk-tick"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="#BFE3C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Within your ceiling of S$2,000 to S$6,000.</span></div>
+                  <div class="mk-sub">Includes</div>
+                  <div class="mk-tick"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="#BFE3C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>A 3-day wake, rites for your tradition, casket, hearse and wake setup.</span></div>
+                  <div class="mk-caut">Watch for: extra days, tentage, drinks and incense are often added to the bill.</div>
+                </div>
+                <div class="mk-card">
+                  <div class="mk-kv" style="border-top:none;padding-top:0;"><span>Direct cremation</span><b>From S$1,500</b></div>
+                  <div class="mk-kv" style="padding-bottom:0;"><span>Premium send-off</span><b>Above S$9,000</b></div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="hiw-slide" style="{{hiwSlide3}}">
+          <div class="hiw-phone" aria-hidden="true">
+              <div class="mk-bar">
+                <span class="mk-brand"><img src="/_blob/40af16fc804e95b14913b9f18ed00442" alt="" aria-hidden="true" style="display:block;height:20px;width:auto;">In Good Hands</span>
+                <span class="mk-pill"><span class="mk-dot"></span>Guide (AI)</span>
+              </div>
+              <div class="mk">
+                <div class="mk-prog"><b>40% to administrative completion</b><div class="mk-track"><i style="width:40%;"></i></div></div>
+                <div class="mk-card">
+                  <div class="mk-task"><span class="mk-box done"><svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span>A doctor certifies the death<small>Registered with ICA automatically.</small></span></div>
+                  <div class="mk-task"><span class="mk-box"></span><span>Apply for the cremation permit<small>Your funeral director can help.</small></span></div>
+                  <div class="mk-task"><span class="mk-box"></span><span>Download the death certificate<small>Within 30 days, on MyLegacy@LifeSG.</small></span></div>
+                </div>
+                <div class="mk-lbl"><span class="mk-dot"></span>Ask the Guide anything</div>
+                <div class="mk-chips">
+                  <span class="mk-chip">What to ask any funeral provider</span>
+                  <span class="mk-chip">Red flags in funeral contracts</span>
+                  <span class="mk-chip">How to plan a low-cost but dignified funeral</span>
+                </div>
+                <div class="mk-input"><span>Type a question, or tap a reply</span><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" stroke="#F0A262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+              </div>
+            </div>
+        </div>
+        <div class="hiw-slide" style="{{hiwSlide4}}">
+          <div class="hiw-phone" aria-hidden="true">
+              <div class="mk-bar">
+                <span class="mk-brand"><img src="/_blob/40af16fc804e95b14913b9f18ed00442" alt="" aria-hidden="true" style="display:block;height:20px;width:auto;">In Good Hands</span>
+                <span class="mk-pill"><span class="mk-dot h"></span>Mei (person)</span>
+              </div>
+              <div class="mk">
+                <div class="mk-ai h">I've read your quote. There are three things I'd fix before you pay a deposit.</div>
+                <div class="mk-card">
+                  <div class="mk-row"><span class="mk-ask">Ask about</span><span>The deposit is non-refundable, even if the date has to change.</span></div>
+                  <div class="mk-row"><span class="mk-ask">Ask about</span><span>Overtime charges apply after 10pm, but the rate is not stated.</span></div>
+                  <div class="mk-row"><span class="mk-ask">Ask about</span><span>Transport is listed as “from S$180”.</span></div>
+                  <div class="mk-row"><span class="mk-ok">Looks fair</span><span>The coffin and preparation are in the usual range.</span></div>
+                </div>
+                <div class="mk-ai h">I'll ask for one written, all-in price and a deposit that can move with the date.</div>
+                <div class="mk-lit" style="margin-top:6px;">
+                  <b>Prefer to talk it through?</b>
+                  <span>Call us and speak to a person.</span>
+                  <div class="mk-call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="#FFE6CC" stroke-width="1.8" stroke-linejoin="round"></path></svg>+65 XXXX XXXX</div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin:clamp(28px,4vw,48px) 0 0;text-align:center;font-size:14.5px;line-height:1.5;color:#FFE6CC;text-shadow:0 1px 12px rgba(8,12,40,0.8);">The phone screens show sample content for illustration.</p>
+  </div>
+</section>
+
+<!-- ============ TRY IT YOURSELF: the working AI preview ============ -->
+<section id="try" class="anchor sky-night-b" aria-labelledby="try-title" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(40px,5vw,72px) clamp(20px,4.5vw,64px) clamp(72px,9vw,120px);">
+
+  <!-- warm light behind the preview, like the glow under the headline -->
+  <div aria-hidden="true" class="glow" style="position:absolute;left:50%;top:0;width:min(1600px,160%);height:1000px;transform:translateX(-50%);background:radial-gradient(ellipse 50% 50% at 50% 30%,rgba(240,150,80,0.22) 0%,rgba(224,130,70,0.08) 45%,rgba(224,130,70,0) 72%);pointer-events:none;"></div>
+
+  <div style="position:relative;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(56px,6.5vw,88px);">
+
+    <!-- mockup: working preview -->
+    <div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:clamp(24px,3.5vw,36px);">
+      <div data-reveal style="text-align:center;display:flex;flex-direction:column;gap:14px;max-width:700px;">
+        <span class="eyebrow" style="justify-content:center;color:#FFD9B8;">Live preview</span>
+        <h2 id="try-title" style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.6vw,52px);font-weight:600;line-height:1.1;color:#FFE6CC;text-shadow:0 1px 18px rgba(8,12,40,0.8);">Try It Yourself</h2>
+        <p style="margin:0;font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:#F7DDBF;text-shadow:0 1px 16px rgba(8,12,40,0.8);">This is a working preview with sample content. Tap the replies to walk through an individual's potential first day.</p>
+      </div>
+      <div data-reveal style="--d:120ms;width:100%;">
+        <dc-import name="Demo" hint-size="100%,1020px"></dc-import>
+      </div>
+    </div>
+
+    <!-- CTA: scrolls to the sign-up section at the bottom -->
+    <div data-reveal style="--d:160ms;">
+    <a href="#join" class="cta cta-navy" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;max-width:100%;box-sizing:border-box;padding:19px 36px;border-radius:999px;background:#131846;color:#FFE6CC;font-size:clamp(15px,1.5vw,17px);font-weight:700;line-height:1.3;text-align:center;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(255,214,160,0.45),0 12px 32px rgba(19,24,70,0.40);">
+      <span>Get early access</span>
+      <svg width="20" height="20" fill="none" aria-hidden="true" style="flex:none;">
+        <path d="M10 3v13M4.5 10.5 10 16l5.5-5.5" stroke="#FFE6CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CASE: statistics, then why now, then why In Good Hands ============ -->
+<section id="why" class="sky-sunrise cq" aria-labelledby="why-title" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(72px,9vw,128px) clamp(20px,4.5vw,64px) clamp(64px,8vw,104px);">
+
+  <!-- faint flowing lines, like contour lines on the night sky -->
+  <svg aria-hidden="true" viewBox="0 0 1440 3000" preserveAspectRatio="none" fill="none" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;">
+    <path d="M-40 520 C 320 360, 560 840, 920 680 S 1380 420, 1500 760" stroke="rgba(240,162,98,0.14)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+    <path d="M-40 1560 C 280 1400, 600 1880, 960 1700 S 1400 1480, 1500 1800" stroke="rgba(240,162,98,0.12)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+    <path d="M-40 2440 C 300 2280, 620 2740, 980 2560 S 1380 2360, 1500 2660" stroke="rgba(240,162,98,0.14)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+  </svg>
+
+  <div style="position:relative;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(36px,5vw,72px);">
+
+    <div class="wy-top">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px;">
+        <span class="eyebrow dk" data-reveal style="color:#2A2060;">Rationales</span>
+        <h2 id="why-title" class="why-title" aria-label="But why..."><span data-reveal>But</span> <span data-reveal style="--d:140ms;"><em>why...</em></span></h2>
+      </div>
+      <div class="wy-switch" role="group" aria-label="Choose what to read: why now, or why In Good Hands" data-reveal style="--d:220ms;">
+        <button type="button" class="wy-sw" aria-pressed="{{whyPressNow}}" onClick="{{showWhyNow}}">Now</button>
+        <button type="button" class="wy-sw" aria-pressed="{{whyPressIgh}}" onClick="{{showWhyIgh}}">In Good Hands</button>
+      </div>
+    </div>
+
+    <div class="wy-stack" data-reveal style="--d:120ms;">
+
+    <!-- NOW: Singapore picture at the far left with the title over it, the reasons in three columns -->
+    <div id="whynow" class="anchor wy-panel" style="{{whyPanelNow}}" aria-hidden="{{whyHideNow}}">
+      <div class="wy-pic wy-pic-now"><h3 class="wy-name">Now</h3></div>
+      <div class="wy-cols">
+          <div class="wy-col"><span class="wy-num">01</span><h3 class="wy-ti">Death is inevitable</h3><p class="wy-tx">So death care is crucial, emotional and unavoidable.</p></div>
+          <div class="wy-col"><span class="wy-num">02</span><h3 class="wy-ti">Flagged in 2023</h3><p class="wy-tx">CCCS flagged the industry's problems, yet little has changed.</p></div>
+          <div class="wy-col"><span class="wy-num">03</span><h3 class="wy-ti">Better tools now</h3><p class="wy-tx">With AI and proven models abroad, processes can be made more efficient and empathetic.</p></div>
+      </div>
+    </div>
+
+    <!-- IN GOOD HANDS -->
+    <div id="whyigh" class="anchor wy-panel" style="{{whyPanelIgh}}" aria-hidden="{{whyHideIgh}}">
+      <div class="wy-pic wy-pic-igh"><h3 class="wy-name">In Good Hands</h3></div>
+      <div class="wy-cols wy-cols4">
+          <div class="wy-col"><span class="wy-num">01</span><h3 class="wy-ti">On the family's side</h3><p class="wy-tx">We aim to be an independent service representing families.</p></div>
+          <div class="wy-col"><span class="wy-num">02</span><h3 class="wy-ti">Market Aggregator</h3><p class="wy-tx">Helps families find the best FSP for their needs.</p></div>
+          <div class="wy-col"><span class="wy-num">03</span><h3 class="wy-ti">Beyond the funeral</h3><p class="wy-tx">Paperwork help now; lawyer and counsellor next.</p></div>
+          <div class="wy-col"><span class="wy-num">04</span><h3 class="wy-ti">Tackling grief</h3><p class="wy-tx">The universal emotion after a loss: rarely spoken about, and deserving far more attention.</p></div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="anchor sky-faq cq" aria-labelledby="faq-title" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(56px,7vw,96px) clamp(20px,4.5vw,64px) clamp(80px,9vw,128px);">
+  <div style="position:relative;max-width:1120px;margin:0 auto;">
+    <div class="st-grid">
+      <div class="st-head" data-reveal>
+        <span class="eyebrow dk">FAQ</span>
+        <h2 id="faq-title" class="st-h">Questions families ask</h2>
+        <p class="st-sub">Still wondering about something? <a href="#contact">Write to me</a> and I'll answer personally.</p>
+      </div>
+      <div class="faq-list">
+          <details class="faq-item" data-reveal><summary>What is In Good Hands?</summary><p>A website that helps families in Singapore through a loss: choosing a funeral provider, sharing the paperwork, and looking after yourself through grief.</p></details>
+          <details class="faq-item" data-reveal><summary>Is it free?</summary><p>The Guide, provider matching, the checklist and the journal are free. From September 2027, families who want hands-on help closing a loved one's accounts will be able to pay for it.</p></details>
+          <details class="faq-item" data-reveal><summary>Is it an AI or a real person?</summary><p>Both. An AI Guide explains what to do and asks a few gentle questions. At every step there's a real person to call: our care team, and partner counsellors and lawyers.</p></details>
+          <details class="faq-item" data-reveal><summary>How does provider matching work?</summary><p>Tell the Guide about your beliefs, budget and needs, and it suggests funeral providers that fit, with prices, what's included and what to watch for. We aim to stay independent and on the family's side.</p></details>
+          <details class="faq-item" data-reveal><summary>Can my whole family use it?</summary><p>Yes. Family members join one shared plan, split the checklist between them and see what's done, so no one carries it alone.</p></details>
+          <details class="faq-item" data-reveal><summary>What does account closure cover?</summary><p>The dashboard lists the accounts to close, such as banks, insurance and phone lines, and tracks each one. Hands-on help, where we handle the paperwork with you, is planned from September 2027.</p></details>
+          <details class="faq-item" data-reveal><summary>Who can read my journal?</summary><p>Only you. Your journal and mood check-ins aren't shared with the rest of your family.</p></details>
+          <details class="faq-item" data-reveal><summary>How do you protect my family's information?</summary><p>It comes first. We're building our document and account features with cybersecurity and Singapore's Personal Data Protection Act (PDPA) in mind, and file sharing stays off until it can be secured properly.</p></details>
+          <details class="faq-item" data-reveal><summary>Is this legal or financial advice?</summary><p>No. The Guide gives general information. For matters like wills or an estate, our partner lawyers can help.</p></details>
+          <details class="faq-item" data-reveal><summary>I'm a professional. How can I help?</summary><p>If you're a funeral provider, lawyer, counsellor, insurer or HR leader, tap “Expertise” at the top of the page, or choose your role in the early access form below.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA SECTION (bottom of page; the sign-up button lands here) ============ -->
+<section id="join" class="anchor sky-blue cq" style="position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(80px,9vw,120px) clamp(20px,4.5vw,64px) clamp(120px,12vw,180px);">
+  <div style="position:relative;max-width:880px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(36px,5vw,56px);">
+
+    
+
+    <!-- ===== early access: lit up like the headline screen ===== -->
+    <div data-reveal style="position:relative;width:100%;">
+      <div aria-hidden="true" class="glow" style="position:absolute;left:50%;top:50%;width:min(1500px,170%);height:1000px;transform:translate(-50%,-50%);background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,255,255,0.75) 0%,rgba(255,250,232,0.30) 45%,rgba(255,250,232,0) 72%);pointer-events:none;"></div>
+
+      <div class="lit" style="position:relative;box-sizing:border-box;padding:clamp(32px,6vw,64px) clamp(20px,5vw,64px);border-radius:clamp(16px,2vw,24px);text-align:center;background:radial-gradient(ellipse 90% 130% at 50% 28%,#FFFFFF 0%,#FFFDF7 55%,#FFF7E3 100%);box-shadow:0 0 0 1px rgba(255,244,214,0.9),inset 0 1px 0 rgba(255,255,255,0.9),0 0 80px 10px rgba(255,236,170,0.55),0 24px 70px rgba(40,50,120,0.28);display:flex;flex-direction:column;align-items:center;gap:clamp(24px,3.5vw,32px);">
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <span class="eyebrow dk">Early access</span>
+          <h2 style="margin:0;max-width:760px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4.4vw,50px);font-weight:600;line-height:1.08;letter-spacing:-0.01em;color:#131846;text-wrap:balance;">Let's Make This Happen in Singapore</h2>
+          <p style="margin:0;max-width:600px;font-size:clamp(16px,1.8vw,20px);line-height:1.6;font-weight:500;color:#1E2352;text-wrap:pretty;">Sign up for early access, or offer your expertise if you're a funeral provider, lawyer, counsellor or HR leader.</p>
+        </div>
+
+        <div aria-live="polite" style="width:100%;max-width:600px;text-align:left;">
+          <sc-if value="{{isForm}}" hint-placeholder-val="{{true}}">
+            <div style="display:flex;flex-direction:column;gap:22px;">
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <label for="who-select" style="font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#131846;">Who are you?</label>
+                <div class="sel-wrap">
+                  <select id="who-select" class="who-sel" value="{{who}}" onChange="{{setWho}}">
+                    <option value="individual">An individual</option>
+                    <option value="community">A community or organisation</option>
+                    <option value="provider">A funeral service provider</option>
+                    <option value="lawyer">A lawyer</option>
+                    <option value="counsellor">A counsellor</option>
+                    <option value="hr">An HR manager</option>
+                  </select>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#131846" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </div>
+              </div>
+
+              <div role="group" aria-labelledby="via-label" style="display:flex;flex-direction:column;gap:10px;">
+                <div id="via-label" style="font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#131846;">How should we reach you?</div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                  <button type="button" onClick="{{pickPhone}}" aria-pressed="{{viaPhoneOn}}" style="{{viaPhoneStyle}}">Phone</button>
+                  <button type="button" onClick="{{pickTelegram}}" aria-pressed="{{viaTelegramOn}}" style="{{viaTelegramStyle}}">Telegram</button>
+                  <button type="button" onClick="{{pickEmail}}" aria-pressed="{{viaEmailOn}}" style="{{viaEmailStyle}}">Email</button>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <label for="contact-bottom" style="font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#131846;">{{contactLabel}}</label>
+                <input id="contact-bottom" type="{{contactType}}" value="{{contact}}" onChange="{{setContact}}" placeholder="{{contactPlaceholder}}" autocomplete="off" style="box-sizing:border-box;width:100%;min-height:58px;padding:0 20px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.55);background:#FFF8EA;color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);">
+                <sc-if value="{{hasError}}" hint-placeholder-val="{{false}}">
+                  <div style="font-size:13.5px;font-weight:600;color:#7A2308;">{{errorText}}</div>
+                </sc-if>
+              </div>
+
+              <button type="button" onClick="{{submit}}" class="navy-btn" style="width:100%;box-sizing:border-box;min-height:58px;padding:0 24px;border-radius:999px;border:none;background:#131846;color:#FFE6CC;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(19,24,70,0.35);">Request early access</button>
+              <p style="margin:0;text-align:center;font-size:14.5px;line-height:1.5;color:#1E2352;">Free for the pilot. I'll only use your contact details to reach out to you.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 0;text-align:center;">
+              <svg width="40" height="40" fill="none" aria-hidden="true">
+                <circle cx="20" cy="20" r="18" stroke="#131846" stroke-width="2"></circle>
+                <path d="M12 20.5l5.5 5.5L28 15" stroke="#131846" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div style="font-size:18px;font-weight:700;color:#131846;">Thank you — I'll be in touch.</div>
+              <div style="font-size:15px;font-weight:500;color:#1E2352;">Usually within a few days.</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CONTACT US ============ -->
+<section id="contact" class="anchor cq" aria-labelledby="contact-title" style="box-sizing:border-box;padding:clamp(56px,7vw,96px) clamp(20px,4.5vw,64px) clamp(24px,3vw,36px);background:linear-gradient(180deg,#CFE6F7 0%,#C6E0F4 100%);">
+  <div style="max-width:1120px;margin:0 auto;">
+    <div class="ft-grid">
+
+      <div class="ft-left" data-reveal>
+        <img src="/_blob/f57890f9a5a7fde673794718b428d7bc" alt="In Good Hands" style="display:block;height:clamp(84px,8vw,104px);width:auto;">
+        <p class="ft-blurb">Clarity &amp; Assurance for the Bereaved</p>
+        <h2 id="contact-title" class="ft-h">Contact Us</h2>
+        <sc-if value="{{hasContact}}" hint-placeholder-val="{{false}}">
+          <div class="ft-list">
+            <sc-if value="{{hasEmail}}" hint-placeholder-val="{{false}}"><p class="ft-li"><span>Email</span><a href="{{emailHref}}">{{emailText}}</a></p></sc-if>
+            <sc-if value="{{hasPhone}}" hint-placeholder-val="{{false}}"><p class="ft-li"><span>Phone</span><a href="{{phoneHref}}">{{phoneText}}</a></p></sc-if>
+            <sc-if value="{{hasTelegram}}" hint-placeholder-val="{{false}}"><p class="ft-li"><span>Telegram</span><a href="{{telegramHref}}">{{telegramText}}</a></p></sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{noContact}}" hint-placeholder-val="{{true}}">
+          <p class="ft-note">The quickest way to reach me, for now, is the <a href="#feedback">feedback form</a>. I read every message.</p>
+        </sc-if>
+      </div>
+
+      <div id="feedback" class="ft-right" data-reveal style="--d:120ms;">
+        <h3 class="ft-h">Your Feedback</h3>
+        <p class="ft-sub">Try it &amp; please give me feedback on the site or mockup!</p>
+        <div aria-live="polite" style="display:flex;flex-direction:column;gap:16px;">
+          <sc-if value="{{isFeedbackForm}}" hint-placeholder-val="{{true}}">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <textarea id="feedback-box" aria-label="Your feedback" value="{{feedback}}" onChange="{{setFeedback}}" placeholder="What worked, what confused you, what's missing…" style="width:100%;box-sizing:border-box;min-height:clamp(140px,15vw,180px);padding:16px 18px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.3);background:rgba(255,255,255,0.78);color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);line-height:1.5;resize:vertical;"></textarea>
+                <sc-if value="{{feedbackError}}" hint-placeholder-val="{{false}}">
+                  <div style="font-size:13.5px;font-weight:600;color:#7A2308;">Please write a few words first.</div>
+                </sc-if>
+                <sc-if value="{{feedbackFail}}" hint-placeholder-val="{{false}}">
+                  <div role="alert" style="font-size:13.5px;font-weight:600;color:#7A2308;">{{feedbackFailText}}</div>
+                </sc-if>
+              </div>
+              <button type="button" onClick="{{sendFeedback}}" class="navy-btn" style="align-self:flex-start;min-height:52px;padding:0 30px;border-radius:999px;border:none;background:#131846;color:#FFE6CC;font-family:inherit;font-size:clamp(16px,1.6vw,17px);font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(19,24,70,0.25);">Send feedback</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{feedbackSent}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;flex-direction:column;gap:8px;padding:8px 0;">
+              <svg width="40" height="40" fill="none" aria-hidden="true">
+                <circle cx="20" cy="20" r="18" stroke="#131846" stroke-width="2"></circle>
+                <path d="M12 20.5l5.5 5.5L28 15" stroke="#131846" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div style="font-size:17px;font-weight:600;color:#131846;">Thank you, this really helps.</div>
+              <div style="font-size:14.5px;color:#34427C;">I read every message.</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ft-bottom" data-reveal>
+      <p class="ct-foot">© 2026 In Good Hands · Singapore</p>
+    </div>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":8000}}'>
+const VIA = {
+  phone: { label: 'Your phone number', placeholder: 'e.g. 9123 4567', type: 'tel' },
+  telegram: { label: 'Your Telegram handle', placeholder: '@yourhandle', type: 'text' },
+  email: { label: 'Your email address', placeholder: 'you@email.com', type: 'email' },
+};
+
+function validate(via, v) {
+  if (via === 'phone') return v.replace(/\D/g, '').length >= 8 ? '' : 'Please enter a valid phone number.';
+  if (via === 'email') return /^\S+@\S+\.\S+$/.test(v) ? '' : 'Please enter a valid email address.';
+  return v.replace('@', '').length >= 3 ? '' : 'Please enter your Telegram handle, like @yourhandle.';
+}
+
+// toggle buttons sit on the lit orange screen: navy when selected, navy outline when not
+function toggleStyle(on, grow) {
+  return 'flex:1 1 ' + grow + 'px;min-height:54px;padding:8px 14px;border-radius:14px;border:1.5px solid ' + (on ? '#131846' : 'rgba(19,24,70,0.55)') + ';background:' + (on ? '#131846' : 'transparent') + ';color:' + (on ? '#FFE6CC' : '#131846') + ';font-family:inherit;font-size:clamp(15px,1.5vw,17px);font-weight:600;line-height:1.3;cursor:pointer;';
+}
+
+const HIW_MS = 9000;
+
+// Sign-ups and feedback go to the Formspree inbox when this page runs as the public website,
+// which sets window.IGH_FORM_URL. Inside the design canvas nothing is sent.
+const WHO = { individual: 'An individual', community: 'A community or organisation', provider: 'A funeral service provider', lawyer: 'A lawyer', counsellor: 'A counsellor', hr: 'An HR manager' };
+function sendForm(fields) {
+  const url = typeof window !== 'undefined' && window.IGH_FORM_URL;
+  if (!url) return Promise.resolve();
+  const data = new FormData();
+  Object.keys(fields).forEach((k) => data.append(k, fields[k]));
+  data.append('page', location.href);
+  return fetch(url, { method: 'POST', headers: { Accept: 'application/json' }, body: data })
+    .then((r) => { if (!r.ok) throw new Error('send failed'); });
+}
+const SEND_FAIL = "Couldn't send just now. Please check your connection and try again.";
+
+// Contact details shown in the footer. Fill in any of these and its row appears; empty ones stay hidden.
+// e.g. email: 'hello@yourdomain.sg', phone: '+65 9123 4567', telegram: '@yourhandle'
+const CONTACT = { email: '', phone: '', telegram: '' };
+
+class Component extends DCLogic {
+  // ---------- soft reveal on scroll, and the guided tour through "how it works"
+  isReduced() {
+    if (this._reduced === undefined) {
+      try { this._reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) { this._reduced = false; }
+    }
+    return this._reduced;
+  }
+  componentDidMount() {
+    try { this.setupReveal(); } catch (e) {}
+    try { this.setupTour(); } catch (e) {}
+    try { this.setupChrome(); } catch (e) {}
+  }
+  componentDidUpdate() {
+    // keep everything that has already risen into place visible, whatever the page re-renders
+    try { if (this._rv) this._rv.forEach((el) => { if (!el.classList.contains('in')) el.classList.add('in'); }); } catch (e) {}
+    try { if (this._applyChrome) this._applyChrome(); } catch (e) {}
+  }
+  componentWillUnmount() {
+    try {
+      clearTimeout(this._timer); clearTimeout(this._late1); clearTimeout(this._late2); clearTimeout(this._safe);
+      if (this._io) this._io.disconnect();
+      if (this._tio) this._tio.disconnect();
+      if (this._cio) this._cio.disconnect();
+      if (this._onResize) window.removeEventListener('resize', this._onResize);
+      if (this._onScroll) {
+        document.removeEventListener('scroll', this._onScroll, true);
+        window.removeEventListener('scroll', this._onScroll);
+        window.removeEventListener('resize', this._onScroll);
+      }
+      if (this._raf) cancelAnimationFrame(this._raf);
+      clearTimeout(this._spy1); clearTimeout(this._spy2);
+    } catch (e) {}
+  }
+  // header: the "Early access" button turns solid once the hero is behind you,
+  // the sideways-scrolling section tabs fade out at the right edge while there is more to see,
+  // the tab for the section you are reading gets a line under it,
+  // and the frosted bar turns from night glass to cream glass as the page behind it brightens
+  setupChrome() {
+    this._navMore = false; this._navSolid = false;
+    this._t = 0; this._tone = 'dark'; this._active = '';
+    this._applyChrome = () => {
+      const nav = document.querySelector('.site-nav');
+      if (nav) nav.setAttribute('data-more', this._navMore ? '1' : '0');
+      document.querySelectorAll('.nav-cta').forEach((cta) => cta.setAttribute('data-solid', this._navSolid ? '1' : '0'));
+      const head = document.querySelector('.site-head');
+      if (head) { head.style.setProperty('--t', String(this._t)); head.setAttribute('data-tone', this._tone); }
+      document.querySelectorAll('.nav-tab').forEach((a) => {
+        const on = !!this._active && a.getAttribute('href') === '#' + this._active;
+        a.setAttribute('data-active', on ? '1' : '0');
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    };
+    // scroll-spy. Reads positions straight from the page, so it works whichever element does the scrolling.
+    const SPY_IDS = ['problem', 'story', 'how', 'try', 'why', 'faq', 'contact'];
+    this._spy = () => {
+      const head = document.querySelector('.site-head');
+      if (!head) return;
+      const hr = head.getBoundingClientRect();
+      const vh = document.documentElement.clientHeight || window.innerHeight || 800;
+      // how bright is the page behind the bar? The sunrise comes up over the last 220px of "Try it yourself".
+      let t = 0;
+      const tryEl = document.getElementById('try');
+      if (tryEl) {
+        const d = tryEl.getBoundingClientRect().bottom - (hr.top + hr.height / 2);
+        t = Math.min(1, Math.max(0, 1 - d / 220));
+      }
+      t = Math.round(t * 1000) / 1000;
+      const tone = t >= 0.45 ? 'light' : 'dark';
+      // which section sits just under the bar?
+      const refY = hr.bottom + 40;
+      let active = '';
+      SPY_IDS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        if (r.top <= refY && r.bottom > refY) active = id;
+      });
+      // at the very end of the page the last tab wins, even if its section is too short to reach the reading line
+      const last = document.getElementById('contact');
+      if (last) {
+        const r = last.getBoundingClientRect();
+        if (r.bottom > hr.bottom && r.bottom <= vh + 2 && r.top < vh - 40) active = 'contact';
+      }
+      const activeChanged = active !== this._active;
+      const changed = activeChanged || t !== this._t || tone !== this._tone;
+      this._t = t; this._tone = tone; this._active = active;
+      if (changed) this._applyChrome();
+      if (activeChanged && active) this._showTab(active);
+    };
+    // on a narrow screen the tab row scrolls sideways: slide it so the current tab stays in view
+    this._showTab = (id) => {
+      const nav = document.querySelector('.site-nav');
+      if (!nav || nav.scrollWidth <= nav.clientWidth + 2) return;
+      const tab = nav.querySelector('.nav-tab[href="#' + id + '"]');
+      if (!tab) return;
+      const nr = nav.getBoundingClientRect(), tr = tab.getBoundingClientRect();
+      const left = Math.max(0, nav.scrollLeft + (tr.left - nr.left) - (nav.clientWidth - tr.width) / 2);
+      try { nav.scrollTo({ left: left, behavior: this.isReduced() ? 'auto' : 'smooth' }); } catch (e) { nav.scrollLeft = left; }
+    };
+    this._onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this._raf = 0; try { this._spy(); } catch (e) {} });
+    };
+    document.addEventListener('scroll', this._onScroll, { capture: true, passive: true });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onScroll);
+    this._spy1 = setTimeout(this._onScroll, 300);
+    this._spy2 = setTimeout(this._onScroll, 1500);
+    let tries = 0;
+    const look = () => {
+      const nav = document.querySelector('.site-nav');
+      const hero = document.getElementById('top');
+      if (!nav || !hero) { if (tries++ < 20) setTimeout(look, 250); return; }
+      const measure = () => { this._navMore = (nav.scrollWidth - nav.clientWidth - nav.scrollLeft) > 4; this._applyChrome(); };
+      this._onResize = measure;
+      nav.addEventListener('scroll', measure, { passive: true });
+      window.addEventListener('resize', measure);
+      measure(); setTimeout(measure, 700);
+      this._onScroll();
+      if ('IntersectionObserver' in window) {
+        this._cio = new IntersectionObserver((en) => { this._navSolid = !(en[0] && en[0].isIntersecting); this._applyChrome(); }, { rootMargin: '-80px 0px 0px 0px', threshold: 0 });
+        this._cio.observe(hero);
+      } else { this._navSolid = true; this._applyChrome(); }
+    };
+    look();
+  }
+  setupReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    this._rv = new Set();
+    this._seen = new WeakSet();
+    document.documentElement.classList.add('js');
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          this._rv.add(en.target);
+          this._io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    const scan = () => document.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (!this._seen.has(el)) { this._seen.add(el); this._io.observe(el); }
+    });
+    scan();
+    this._late1 = setTimeout(scan, 400);
+    this._late2 = setTimeout(scan, 1500);
+    // safety net: if nothing has been revealed after a few seconds, show it all
+    this._safe = setTimeout(() => {
+      if (this._rv && this._rv.size === 0) document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('in'));
+    }, 3500);
+  }
+  setupTour() {
+    this._inView = false; this._hover = false; this._running = false; this._frac = 0;
+    if (this.isReduced()) return;
+    let tries = 0;
+    const look = () => {
+      const el = document.querySelector('.hiw-acc');
+      if (!el) { if (tries++ < 20) setTimeout(look, 250); return; }
+      if (!('IntersectionObserver' in window)) { this._inView = true; this.tourSync(); return; }
+      this._tio = new IntersectionObserver((en) => {
+        this._inView = !!(en[0] && en[0].isIntersecting);
+        this.tourSync();
+      }, { threshold: 0.35 });
+      this._tio.observe(el);
+      el.addEventListener('mouseenter', () => { this._hover = true; this.tourSync(); });
+      el.addEventListener('mouseleave', () => { this._hover = false; this.tourSync(); });
+    };
+    look();
+  }
+  // play while the section is on screen and the pointer is away; hold still otherwise
+  tourSync() {
+    if (this.isReduced()) return;
+    const want = this._inView && !this._hover && !this._userPaused;
+    if (want && !this._running) this.tourPlay();
+    else if (!want && this._running) this.tourFreeze();
+  }
+  tourPlay() {
+    clearTimeout(this._timer);
+    this._running = true;
+    this._dur = Math.max(400, (1 - this._frac) * HIW_MS);
+    this._t0 = Date.now();
+    this._timer = setTimeout(() => this.tourNext(), this._dur);
+    this.setState({ hiwRun: true, hiwFrozen: null });
+  }
+  tourFreeze() {
+    clearTimeout(this._timer);
+    this._running = false;
+    this._frac = Math.min(0.999, this._frac + (Date.now() - this._t0) / HIW_MS);
+    this.setState({ hiwFrozen: this._frac });
+  }
+  tourNext() { this.tourGoto(((this.state.hiwOpen ?? 0) + 1) % 4); }
+  tourGoto(i) {
+    clearTimeout(this._timer);
+    this._frac = 0;
+    if (this.isReduced()) { this.setState({ hiwOpen: i }); return; }
+    const play = this._inView && !this._hover && !this._userPaused;
+    this._running = play;
+    if (play) { this._dur = HIW_MS; this._t0 = Date.now(); this._timer = setTimeout(() => this.tourNext(), HIW_MS); }
+    this.setState({ hiwOpen: i, hiwRun: play, hiwFrozen: play ? null : 0 });
+  }
+
+  renderVals() {
+    // How it works: one step is active at a time. It fills its rail, then the next step takes over
+    const hiwOpen = this.state.hiwOpen ?? 0;
+    const hiwRun = !!this.state.hiwRun;
+    const hiwFrozen = this.state.hiwFrozen;
+    const reduced = this.isReduced();
+    const hiwItem = (i) => 'opacity:' + (hiwOpen === i ? '1' : '0.86') + ';';
+    const hiwPanel = (i) => (hiwOpen === i ? 'grid-template-rows:1fr;opacity:1;' : 'grid-template-rows:0fr;opacity:0;');
+    const hiwExp = (i) => (hiwOpen === i ? 'true' : 'false');
+    const hiwBar = (i) => {
+      if (hiwOpen !== i) return 'transform:scaleY(0);transition:none;';
+      if (reduced) return 'transform:scaleY(1);transition:none;';
+      if (hiwFrozen != null) return 'transform:scaleY(' + Number(hiwFrozen).toFixed(3) + ');transition:none;';
+      if (!hiwRun) return 'transform:scaleY(0);transition:none;';
+      return 'transform:scaleY(1);transition:transform ' + Math.round(this._dur || HIW_MS) + 'ms linear;';
+    };
+    const hiwSlide = (i) => (hiwOpen === i ? 'opacity:1;transform:none;' : 'opacity:0;transform:translateY(14px) scale(0.985);pointer-events:none;');
+    // "But why": show one panel at a time, Now or In Good Hands
+    const whyTab = this.state.whyTab ?? 0;
+    const whyPanel = (on) => (on
+      ? 'opacity:1;visibility:visible;transform:none;transition:opacity .45s ease .12s,transform .55s cubic-bezier(.22,.9,.24,1) .12s,visibility 0s;'
+      : 'opacity:0;visibility:hidden;transform:translateY(12px);pointer-events:none;transition:opacity .3s ease,transform .4s ease,visibility 0s linear .3s;');
+    // Left/right toggle: the problem pairs
+    const pfIdx = this.state.pfIdx ?? 0;
+    const crTrack = (idx) => 'transform:translateX(-' + (idx * 100) + '%);';
+    const crCur = (idx, i) => (idx === i ? 'true' : 'false');
+    const crHide = (idx, i) => (idx === i ? 'false' : 'true');
+    const pfGo = (i) => () => this.setState({ pfIdx: i });
+    const who = this.state.who ?? 'individual';
+    const via = this.state.via ?? 'phone';
+    const contact = this.state.contact ?? '';
+    const error = this.state.error ?? '';
+    const joined = this.state.joined ?? false;
+    const feedback = this.state.feedback ?? '';
+    const feedbackError = this.state.feedbackError ?? false;
+    const feedbackSent = this.state.feedbackSent ?? false;
+    const v = VIA[via];
+
+    return {
+      // how it works
+      hiwToggle: () => { this._userPaused = !this._userPaused; this.setState({ hiwUserPaused: this._userPaused }); this.tourSync(); },
+      hiwPausedAttr: this.state.hiwUserPaused ? 'true' : 'false',
+      hiwToggleLabel: this.state.hiwUserPaused ? 'Play the tour' : 'Pause the tour',
+      hiwToggleIcon: this.state.hiwUserPaused ? 'M8 5l11 7-11 7Z' : 'M8 5v14M16 5v14',
+      hiwItem1: hiwItem(0),
+      hiwPanel1: hiwPanel(0),
+      hiwExp1: hiwExp(0),
+      hiwBar1: hiwBar(0),
+      hiwSlide1: hiwSlide(0),
+      hiwOpen1: () => this.tourGoto(0),
+      hiwItem2: hiwItem(1),
+      hiwPanel2: hiwPanel(1),
+      hiwExp2: hiwExp(1),
+      hiwBar2: hiwBar(1),
+      hiwSlide2: hiwSlide(1),
+      hiwOpen2: () => this.tourGoto(1),
+      hiwItem3: hiwItem(2),
+      hiwPanel3: hiwPanel(2),
+      hiwExp3: hiwExp(2),
+      hiwBar3: hiwBar(2),
+      hiwSlide3: hiwSlide(2),
+      hiwOpen3: () => this.tourGoto(2),
+      hiwItem4: hiwItem(3),
+      hiwPanel4: hiwPanel(3),
+      hiwExp4: hiwExp(3),
+      hiwBar4: hiwBar(3),
+      hiwSlide4: hiwSlide(3),
+      hiwOpen4: () => this.tourGoto(3),
+
+      // "But why" toggle
+      whyPanelNow: whyPanel(whyTab === 0),
+      whyPanelIgh: whyPanel(whyTab === 1),
+      whyHideNow: whyTab === 0 ? 'false' : 'true',
+      whyHideIgh: whyTab === 1 ? 'false' : 'true',
+      whyPressNow: whyTab === 0 ? 'true' : 'false',
+      whyPressIgh: whyTab === 1 ? 'true' : 'false',
+      showWhyNow: () => this.setState({ whyTab: 0 }),
+      showWhyIgh: () => this.setState({ whyTab: 1 }),
+
+      // the problem toggle (4 pairs)
+      pfTrack: crTrack(pfIdx),
+      pfPrev: () => this.setState({ pfIdx: ((this.state.pfIdx ?? 0) + 3) % 4 }),
+      pfNext: () => this.setState({ pfIdx: ((this.state.pfIdx ?? 0) + 1) % 4 }),
+      pfGo0: pfGo(0),
+      pfGo1: pfGo(1),
+      pfGo2: pfGo(2),
+      pfGo3: pfGo(3),
+      pfCur0: crCur(pfIdx, 0),
+      pfCur1: crCur(pfIdx, 1),
+      pfCur2: crCur(pfIdx, 2),
+      pfCur3: crCur(pfIdx, 3),
+      pfHide0: crHide(pfIdx, 0),
+      pfHide1: crHide(pfIdx, 1),
+      pfHide2: crHide(pfIdx, 2),
+      pfHide3: crHide(pfIdx, 3),
+
+      // contact details (see CONTACT at the top of the script)
+      hasContact: !!(CONTACT.email || CONTACT.phone || CONTACT.telegram),
+      noContact: !(CONTACT.email || CONTACT.phone || CONTACT.telegram),
+      hasEmail: !!CONTACT.email, emailText: CONTACT.email, emailHref: 'mailto:' + CONTACT.email,
+      hasPhone: !!CONTACT.phone, phoneText: CONTACT.phone, phoneHref: 'tel:' + String(CONTACT.phone).replace(/[^+0-9]/g, ''),
+      hasTelegram: !!CONTACT.telegram, telegramText: CONTACT.telegram, telegramHref: 'https://t.me/' + String(CONTACT.telegram).replace(/^@/, ''),
+
+      // feedback
+      isFeedbackForm: !feedbackSent,
+      feedbackSent,
+      feedback,
+      feedbackError,
+      setFeedback: (e) => this.setState({ feedback: e.target.value, feedbackError: false }),
+      feedbackFail: !!this.state.feedbackFail,
+      feedbackFailText: SEND_FAIL,
+      sendFeedback: () => {
+        const text = (this.state.feedback ?? '').trim();
+        if (!text) { this.setState({ feedbackError: true }); return; }
+        if (this._sendingFb) return;
+        this._sendingFb = true;
+        sendForm({ form: 'Feedback', message: text, _subject: 'New In Good Hands feedback' })
+          .then(() => this.setState({ feedbackSent: true, feedbackFail: false }))
+          .catch(() => this.setState({ feedbackFail: true }))
+          .finally(() => { this._sendingFb = false; });
+      },
+
+      // early access
+      isForm: !joined,
+      isDone: joined,
+      who,
+      setWho: (e) => this.setState({ who: e.target.value }),
+      pickIndividual: () => this.setState({ who: 'individual' }),
+      pickCommunity: () => this.setState({ who: 'community' }),
+      pickProvider: () => this.setState({ who: 'provider' }),
+      whoIndividualOn: who === 'individual' ? 'true' : 'false',
+      whoCommunityOn: who === 'community' ? 'true' : 'false',
+      whoProviderOn: who === 'provider' ? 'true' : 'false',
+      whoIndividualStyle: toggleStyle(who === 'individual', 150),
+      whoCommunityStyle: toggleStyle(who === 'community', 190),
+      whoProviderStyle: toggleStyle(who === 'provider', 190),
+
+      pickPhone: () => this.setState({ via: 'phone', contact: '', error: '' }),
+      pickTelegram: () => this.setState({ via: 'telegram', contact: '', error: '' }),
+      pickEmail: () => this.setState({ via: 'email', contact: '', error: '' }),
+      viaPhoneOn: via === 'phone' ? 'true' : 'false',
+      viaTelegramOn: via === 'telegram' ? 'true' : 'false',
+      viaEmailOn: via === 'email' ? 'true' : 'false',
+      viaPhoneStyle: toggleStyle(via === 'phone', 90),
+      viaTelegramStyle: toggleStyle(via === 'telegram', 90),
+      viaEmailStyle: toggleStyle(via === 'email', 90),
+
+      contact,
+      contactLabel: v.label,
+      contactPlaceholder: v.placeholder,
+      contactType: v.type,
+      hasError: error.length > 0,
+      errorText: error,
+      setContact: (e) => this.setState({ contact: e.target.value, error: '' }),
+      submit: () => {
+        const val = (this.state.contact ?? '').trim();
+        const msg = validate(this.state.via ?? 'phone', val);
+        if (msg) { this.setState({ error: msg }); return; }
+        if (this._sendingJoin) return;
+        this._sendingJoin = true;
+        const whoKey = this.state.who ?? 'individual';
+        sendForm({ form: 'Early access', who: WHO[whoKey] || whoKey, via: this.state.via ?? 'phone', contact: val, _subject: 'New In Good Hands early-access signup' })
+          .then(() => this.setState({ joined: true }))
+          .catch(() => this.setState({ error: SEND_FAIL }))
+          .finally(() => { this._sendingJoin = false; });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
