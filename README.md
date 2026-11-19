@@ -19,4 +19,4 @@ To update the site after changing the design: copy the new `.dc.html` files into
 
 ## Forms
 
-The early-access sign-up and the feedback box both post to the Formspree form `xkjgbozd` (set as `FORM_URL` in `build.py`). Each submission has a `form` field, either `Early access` or `Feedback`, so you can tell them apart in the Formspree inbox. Both carry the person's `name`. Early-access entries also carry `who`, `via`, `contact` and an optional `message`; feedback entries carry `message` and an optional `contact`. Every entry includes the `page` it came from.
+The early-access sign-up and the feedback box both post to the Formspree form `xkjgbozd` (set as `FORM_URL` in `build.py`). Each submission has a `form` field, either `Early access` or `Feedback`, so you can tell them apart in the Formspree inbox. Both carry the person's `name`. Early-access entries also carry `wants` (Give feedback or Offer expertise), `who`, `via`, `contact` and, for feedback, a `message`; feedback entries carry `message` and an optional `contact`. Every entry includes the `page` it came from.
