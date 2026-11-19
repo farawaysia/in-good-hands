@@ -698,6 +698,18 @@ a.j-call:active{transform:scale(0.98)}
 @media (prefers-reduced-motion:reduce){
   .a-acct-box,.a-acct-fill,.a-todo-x{transition:none}
 }
+/* ----- replies: small chips, or a pop-up list when there are several ----- */
+.chip-pick{position:relative}
+.chip-open{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:#F0A262;color:#131846;font-family:inherit;font-size:clamp(14px,1.35vw,15.5px);font-weight:700;cursor:pointer;box-shadow:0 0 20px rgba(240,162,98,0.35)}
+.chip-open:hover{background:#F7B27C}
+.chip-open .badge{background:rgba(19,24,70,0.16);color:#131846}
+.chip-menu{position:absolute;left:0;bottom:calc(100% + 8px);z-index:6;box-sizing:border-box;width:min(440px,calc(100vw - 64px));max-height:min(320px,52vh);overflow-y:auto;display:flex;flex-direction:column;gap:2px;padding:6px;border-radius:16px;border:1.5px solid #EE9A57;background:#0E1028;box-shadow:0 18px 50px rgba(0,0,0,0.6)}
+.chip-item{min-height:44px;padding:10px 14px;border:0;border-radius:10px;background:transparent;color:#FFE6CC;font-family:inherit;font-size:15px;line-height:1.35;text-align:left;cursor:pointer}
+.chip-item:hover,.chip-item:focus-visible{background:rgba(238,154,87,0.18)}
+.chip-item[data-kind="primary"]{color:#F7C08E;font-weight:700}
+.chip-item[data-kind="human"]{border-top:1px solid rgba(238,154,87,0.25);border-radius:0 0 10px 10px;color:#FFE6CC;font-weight:600}
+.more-below{position:sticky;bottom:4px;align-self:center;flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin-top:-6px;padding:0;border:0;border-radius:50%;background:#F0A262;box-shadow:0 6px 18px rgba(0,0,0,0.45);cursor:pointer;z-index:2}
+.more-below:hover{background:#F7B27C}
 /* ----- one box, one size, on every tab: each view scrolls inside it ----- */
 .igh .side,.igh .jcol,.igh .acol{height:760px;overflow-y:auto;border-radius:24px;scrollbar-width:thin;scrollbar-color:rgba(238,154,87,0.45) transparent}
 .igh .side>section,.igh .jcol>section,.igh .acol>section{min-height:100%;box-sizing:border-box}
@@ -1490,7 +1502,7 @@ a.j-call:active{transform:scale(0.98)}
         </div>
       </div>
 
-      <div id="demo-msgs" aria-live="polite" style="position:relative;flex:1 1 0;min-height:0;overflow-y:auto;padding:clamp(14px,2vw,20px) clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:14px;">
+      <div id="demo-msgs" aria-live="polite" onScroll="{{msgsScroll}}" style="flex:1 1 0;min-height:0;overflow-y:auto;padding:clamp(14px,2vw,20px) clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:14px;">
         <sc-for list="{{messages}}" as="m" hint-placeholder-count="3">
           <div class="msg" style="{{m.rowStyle}}">
             <sc-if value="{{m.hasLabel}}" hint-placeholder-val="{{true}}">
@@ -1518,6 +1530,9 @@ a.j-call:active{transform:scale(0.98)}
             </sc-if>
           </div>
         </sc-for>
+        <sc-if value="{{moreBelow}}" hint-placeholder-val="{{false}}">
+          <button type="button" class="more-below" onClick="{{scrollDown}}" aria-label="Scroll to the latest message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#131846" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></button>
+        </sc-if>
       </div>
 
       <sc-if value="{{showNudge}}" hint-placeholder-val="{{false}}">
@@ -1526,21 +1541,26 @@ a.j-call:active{transform:scale(0.98)}
         </div>
       </sc-if>
 
-      <sc-if value="{{hasChips}}" hint-placeholder-val="{{true}}">
-        <div class="reply-pick">
-          <sc-if value="{{trayOpen}}" hint-placeholder-val="{{false}}">
-            <div id="reply-menu" class="reply-menu" role="listbox" aria-label="Choose a reply">
-              <sc-for list="{{chips}}" as="c" hint-placeholder-count="3">
-                <button type="button" role="option" class="demo-chip reply-opt" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}}</button>
-              </sc-for>
-            </div>
-          </sc-if>
-          <button type="button" class="reply-toggle" aria-haspopup="listbox" aria-controls="reply-menu" aria-expanded="{{trayOpenAttr}}" onClick="{{toggleTray}}">
-            <span>{{trayLabel}}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
-          </button>
-        </div>
-      </sc-if>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:0 clamp(14px,2vw,22px) 10px;">
+        <sc-for list="{{chipsInline}}" as="c" hint-placeholder-count="2">
+          <button type="button" class="demo-chip" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}}</button>
+        </sc-for>
+        <sc-if value="{{hasChipMenu}}" hint-placeholder-val="{{false}}">
+          <div class="chip-pick" onKeyDown="{{chipMenuKey}}">
+            <button type="button" id="chip-open" class="chip-open" aria-haspopup="true" aria-expanded="{{chipMenuAttr}}" aria-controls="chip-menu" onClick="{{toggleChipMenu}}">
+              <span>Choose a reply</span><span class="badge">{{chipCount}}</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chipChevron}}"><path d="M6 15l6-6 6 6"></path></svg>
+            </button>
+            <sc-if value="{{chipMenuOpen}}" hint-placeholder-val="{{false}}">
+              <div id="chip-menu" class="chip-menu" role="group" aria-label="Replies">
+                <sc-for list="{{chipsMenu}}" as="c" hint-placeholder-count="4">
+                  <button type="button" class="chip-item" data-kind="{{c.kind}}" onClick="{{c.pick}}">{{c.label}}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
 
       <!-- steps to completion: always visible above the message box -->
       <div style="padding:12px clamp(14px,2vw,22px) 0;border-top:1px solid rgba(238,154,87,0.3);">
@@ -4860,29 +4880,24 @@ class Component extends DCLogic {
         this._lastKey = key;
         const el = document.getElementById('demo-msgs');
         if (el) {
-          const kids = el.children;
-          const prevCount = prev ? +prev[0] : 0;
-          const prevTyping = prev ? prev[1] === '1' : false;
-          let target = null;
-          if (!prev || prev[2] !== E.view || E.msgs.length < prevCount) {
-            el.scrollTop = el.scrollHeight; // first load, coming back to the chat, or a restart
-          } else if (E.msgs.length > prevCount) {
-            target = kids[prevCount];
-          } else if (E.typing && !prevTyping) {
-            target = kids[E.msgs.length];
+          const mine = Array.prototype.filter.call(el.children, (n) => n.classList && n.classList.contains('msg') && n.style.alignSelf === 'flex-end');
+          const n = mine.length;
+          if (n > (this._mineN || 0)) {
+            // a new message from the person: put it near the top, so the reply reads from its start
+            const row = mine[n - 1];
+            el.scrollTop += row.getBoundingClientRect().top - el.getBoundingClientRect().top - 12;
+          } else if (n === 0 && el.scrollHeight - el.scrollTop - el.clientHeight < 80) {
+            // before the person has said anything, follow the Guide's opening lines while they still fit
+            el.scrollTop = el.scrollHeight;
           }
-          // like ChatGPT: bring the start of what's new into view, but never scroll past it.
-          // Longer replies are read by scrolling down.
-          if (target) {
-            const last = kids[kids.length - 1];
-            const newBottom = last.offsetTop + last.offsetHeight + 16;
-            const viewBottom = el.scrollTop + el.clientHeight;
-            if (newBottom > viewBottom) {
-              el.scrollTop = Math.min(target.offsetTop - 12, newBottom - el.clientHeight);
-            }
-          }
+          this._mineN = n;
         }
       }
+      try {
+        const el2 = document.getElementById('demo-msgs');
+        const more = !!el2 && el2.scrollHeight - el2.scrollTop - el2.clientHeight > 24;
+        if (more !== !!this.state.moreBelow) this.setState({ moreBelow: more });
+      } catch (e) {}
       this.jAfterUpdate(E);
       // moving between the journal's pages: bring the top of the stage back into view if it has scrolled away
       const jKey = E.view + ':' + E.jview;
@@ -6422,12 +6437,13 @@ class Component extends DCLogic {
     // chat
     const messages = E.msgs.map((m) => this.msgView(m));
     if (E.typing) messages.push(this.typingView(E.typing));
-    const chipBase = 'min-height:46px;padding:8px 18px;border-radius:999px;font-family:inherit;font-size:clamp(14.5px,1.4vw,16px);font-weight:600;line-height:1.3;text-align:left;cursor:pointer;';
+    const chipBase = 'min-height:40px;padding:6px 14px;border-radius:999px;font-family:inherit;font-size:clamp(13.5px,1.3vw,15px);font-weight:600;line-height:1.3;text-align:left;cursor:pointer;';
     const chips = E.busy
       ? []
       : E.tray.map((c) => ({
           label: c.label,
-          pick: () => this.choose(c),
+          pick: () => { if (this.state.chipMenu) this.setState({ chipMenu: false }); this.choose(c); },
+          kind: c.primary ? 'primary' : c.human ? 'human' : 'plain',
           style: chipBase + (c.primary
             ? 'border:2px solid #F0A262;background:#F0A262;color:#131846;font-weight:700;box-shadow:0 0 22px rgba(240,162,98,0.4);'
             : c.human
@@ -6460,11 +6476,31 @@ class Component extends DCLogic {
       // chat
       messages,
       chips,
-      hasChips: nChips > 0,
-      trayOpen: !!E.trayOpen,
-      trayOpenAttr: on(!!E.trayOpen),
-      trayLabel,
-      toggleTray: () => { if (nChips === 1 && !E.trayOpen) { chips[0].pick(); return; } E.trayOpen = !E.trayOpen; this.bump(); },
+      chipsInline: chips.length <= 2 ? chips : [],
+      chipsMenu: chips.length > 2 ? chips : [],
+      hasChipMenu: chips.length > 2,
+      chipCount: String(chips.length),
+      chipMenuOpen: chips.length > 2 && !!this.state.chipMenu,
+      chipMenuAttr: chips.length > 2 && this.state.chipMenu ? 'true' : 'false',
+      chipChevron: this.state.chipMenu ? 'flex:none;' : 'flex:none;transform:rotate(180deg);',
+      toggleChipMenu: () => this.setState({ chipMenu: !this.state.chipMenu }),
+      chipMenuKey: (e) => {
+        if (e.key === 'Escape' && this.state.chipMenu) {
+          e.preventDefault();
+          this.setState({ chipMenu: false });
+          try { const b = document.getElementById('chip-open'); if (b) b.focus(); } catch (err) {}
+        }
+      },
+      moreBelow: !!this.state.moreBelow && E.view === 'chat',
+      msgsScroll: (e) => {
+        const el = e.currentTarget;
+        const more = el.scrollHeight - el.scrollTop - el.clientHeight > 24;
+        if (more !== !!this.state.moreBelow) this.setState({ moreBelow: more });
+      },
+      scrollDown: () => {
+        const el = document.getElementById('demo-msgs');
+        if (el) { try { el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); } catch (err) { el.scrollTop = el.scrollHeight; } }
+      },
       typed,
       liveOn: live,
       pillText: live ? 'Guide (AI) is on · live test' : 'Guide (AI) is on',
