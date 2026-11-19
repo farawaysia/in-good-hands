@@ -268,7 +268,7 @@ html.js [data-reveal].in{opacity:1;transform:none}
 @media (max-width:1100px){.wy-panel{grid-template-columns:minmax(0,1fr)}.wy-pic{min-height:220px}}
 @media (max-width:700px){.wy-switch{width:100%}.wy-sw{flex:1 1 0;padding:0 12px}.wy-cols{grid-template-columns:minmax(0,1fr);padding:6px 0 14px}.wy-col{padding:20px 22px}.wy-col+.wy-col{border-left:0;border-top:1px solid rgba(19,24,70,0.14)}}
 /* ---- Contact Us (compact) ---- */
-.ft-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(36px,6vw,96px);align-items:start}
+.ft-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(36px,6vw,96px);align-items:start}
 .ft-left{display:flex;flex-direction:column;align-items:flex-start}
 .ft-blurb{margin:14px 0 0;max-width:340px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(20px,1.8vw,24px);line-height:1.3;color:#34427C}
 .ft-h{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3vw,38px);font-weight:600;line-height:1.1;letter-spacing:-0.01em;color:#131846}
@@ -745,8 +745,7 @@ a.j-call:active{transform:scale(0.98)}
     <a class="nav-tab" href="#contact">Contact Us</a>
   </nav>
   <div class="head-btns">
-    <a href="#contact" class="nav-cta nav-alt">Feedback</a>
-    <a href="#join" class="nav-cta" onClick="{{pickExpertiseNav}}">Expertise</a>
+    <a href="#join" class="nav-cta">Early Access</a>
   </div>
 </header>
 </div>
@@ -1294,7 +1293,7 @@ a.j-call:active{transform:scale(0.98)}
       <div class="st-head" data-reveal="">
         <span class="eyebrow dk">FAQ</span>
         <h2 id="faq-title" class="st-h">Questions families ask</h2>
-        <p class="st-sub">Still wondering about something? <a href="#contact">Write to me</a> and I'll answer personally.</p>
+        <p class="st-sub">Still wondering about something? <a href="#join">Write to me</a> and I'll answer personally.</p>
       </div>
       <div class="faq-list">
           <details class="faq-item" data-reveal=""><summary>What is In Good Hands?</summary><p>A website that helps families in Singapore through a loss: choosing a funeral provider, sharing the paperwork, and looking after yourself through grief.</p></details>
@@ -1306,7 +1305,7 @@ a.j-call:active{transform:scale(0.98)}
           <details class="faq-item" data-reveal=""><summary>Who can read my journal?</summary><p>Only you. Your journal and mood check-ins aren't shared with the rest of your family.</p></details>
           <details class="faq-item" data-reveal=""><summary>How do you protect my family's information?</summary><p>It comes first. We're building our document and account features with cybersecurity and Singapore's Personal Data Protection Act (PDPA) in mind, and file sharing stays off until it can be secured properly.</p></details>
           <details class="faq-item" data-reveal=""><summary>Is this legal or financial advice?</summary><p>No. The Guide gives general information. For matters like wills or an estate, our partner lawyers can help.</p></details>
-          <details class="faq-item" data-reveal=""><summary>I'm a professional. How can I help?</summary><p>If you're a funeral provider, lawyer, counsellor, insurer or HR leader, tap “Expertise” at the top of the page, or choose your role in the early access form below.</p></details>
+          <details class="faq-item" data-reveal=""><summary>I'm a professional. How can I help?</summary><p>If you're a funeral provider, lawyer, counsellor, insurer or HR leader, choose your role and “Offer expertise” in the early access form below.</p></details>
       </div>
     </div>
   </div>
@@ -1435,52 +1434,8 @@ a.j-call:active{transform:scale(0.98)}
           </div>
         </sc-if>
         <sc-if value="{{noContact}}" hint-placeholder-val="{{true}}">
-          <p class="ft-note">The quickest way to reach me, for now, is the <a href="#feedback">feedback form</a>. I read every message.</p>
+          <p class="ft-note">The quickest way to reach me, for now, is the <a href="#join">early access form</a>. I read every message.</p>
         </sc-if>
-      </div>
-
-      <div id="feedback" class="ft-right" data-reveal="" style="--d:120ms;">
-        <h3 class="ft-h">Your Feedback</h3>
-        <p class="ft-sub">Try it &amp; please give me feedback on the site or mockup!</p>
-        <div aria-live="polite" style="display:flex;flex-direction:column;gap:16px;">
-          <sc-if value="{{isFeedbackForm}}" hint-placeholder-val="{{true}}">
-            <div style="display:flex;flex-direction:column;gap:16px;">
-              <div style="display:flex;flex-wrap:wrap;gap:12px;">
-                <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:6px;">
-                  <label for="fb-name" class="fb-lbl">Your name</label>
-                  <input id="fb-name" class="fb-in" type="text" value="{{fbName}}" onChange="{{setFbName}}" placeholder="e.g. Sarah Tan" autocomplete="name">
-                  <sc-if value="{{fbNameError}}" hint-placeholder-val="{{false}}">
-                    <div class="ea-err">Please tell us your name.</div>
-                  </sc-if>
-                </div>
-                <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:6px;">
-                  <label for="fb-contact" class="fb-lbl">Phone, Telegram or email <span>(optional)</span></label>
-                  <input id="fb-contact" class="fb-in" type="text" value="{{fbContact}}" onChange="{{setFbContact}}" placeholder="So we can reply" autocomplete="off">
-                </div>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:8px;">
-                <textarea id="feedback-box" aria-label="Your feedback" value="{{feedback}}" onChange="{{setFeedback}}" placeholder="What worked, what confused you, what's missing…" style="width:100%;box-sizing:border-box;min-height:clamp(140px,15vw,180px);padding:16px 18px;border-radius:14px;border:1.5px solid rgba(19,24,70,0.3);background:rgba(255,255,255,0.78);color:#131846;font-family:inherit;font-size:clamp(16px,1.6vw,18px);line-height:1.5;resize:vertical;"></textarea>
-                <sc-if value="{{feedbackError}}" hint-placeholder-val="{{false}}">
-                  <div style="font-size:13.5px;font-weight:600;color:#7A2308;">Please write a few words first.</div>
-                </sc-if>
-                <sc-if value="{{feedbackFail}}" hint-placeholder-val="{{false}}">
-                  <div role="alert" style="font-size:13.5px;font-weight:600;color:#7A2308;">{{feedbackFailText}}</div>
-                </sc-if>
-              </div>
-              <button type="button" onClick="{{sendFeedback}}" class="navy-btn" style="align-self:flex-start;min-height:52px;padding:0 30px;border-radius:999px;border:none;background:#131846;color:#FFE6CC;font-family:inherit;font-size:clamp(16px,1.6vw,17px);font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(19,24,70,0.25);">Send feedback</button>
-            </div>
-          </sc-if>
-          <sc-if value="{{feedbackSent}}" hint-placeholder-val="{{false}}">
-            <div style="display:flex;flex-direction:column;gap:8px;padding:8px 0;">
-              <svg width="40" height="40" fill="none" aria-hidden="true">
-                <circle cx="20" cy="20" r="18" stroke="#131846" stroke-width="2"></circle>
-                <path d="M12 20.5l5.5 5.5L28 15" stroke="#131846" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-              <div role="status" style="font-size:17px;font-weight:600;color:#131846;">{{fbDoneTitle}}</div>
-              <div style="font-size:14.5px;color:#34427C;">I read every message.</div>
-            </div>
-          </sc-if>
-        </div>
       </div>
 
     </div>
